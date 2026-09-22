@@ -1,0 +1,545 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		100000000000000000000101 /* MoodJournalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000001 /* MoodJournalApp.swift */; };
+		100000000000000000000102 /* MoodModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000002 /* MoodModels.swift */; };
+		100000000000000000000103 /* DiaryNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000003 /* DiaryNote.swift */; };
+		100000000000000000000104 /* Color+MoodJournal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000004 /* Color+MoodJournal.swift */; };
+		100000000000000000000105 /* MoodAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000005 /* MoodAnalytics.swift */; };
+		100000000000000000000106 /* HealthKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000006 /* HealthKitService.swift */; };
+		100000000000000000000107 /* MoodJournalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000007 /* MoodJournalViewModel.swift */; };
+		100000000000000000000108 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000008 /* RootView.swift */; };
+		100000000000000000000109 /* ChartsDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000009 /* ChartsDashboardView.swift */; };
+		10000000000000000000010A /* DiaryTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10000000000000000000000A /* DiaryTableView.swift */; };
+		10000000000000000000010B /* MoodAnalyticsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10000000000000000000000B /* MoodAnalyticsTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		100000000000000000000201 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 100000000000000000000301 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 100000000000000000000401;
+			remoteInfo = "mood-journal";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		100000000000000000000001 /* MoodJournalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodJournalApp.swift; sourceTree = "<group>"; };
+		100000000000000000000002 /* MoodModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodModels.swift; sourceTree = "<group>"; };
+		100000000000000000000003 /* DiaryNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryNote.swift; sourceTree = "<group>"; };
+		100000000000000000000004 /* Color+MoodJournal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+MoodJournal.swift"; sourceTree = "<group>"; };
+		100000000000000000000005 /* MoodAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodAnalytics.swift; sourceTree = "<group>"; };
+		100000000000000000000006 /* HealthKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitService.swift; sourceTree = "<group>"; };
+		100000000000000000000007 /* MoodJournalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodJournalViewModel.swift; sourceTree = "<group>"; };
+		100000000000000000000008 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		100000000000000000000009 /* ChartsDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsDashboardView.swift; sourceTree = "<group>"; };
+		10000000000000000000000A /* DiaryTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryTableView.swift; sourceTree = "<group>"; };
+		10000000000000000000000B /* MoodAnalyticsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodAnalyticsTests.swift; sourceTree = "<group>"; };
+		10000000000000000000000C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		10000000000000000000000D /* mood-journal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "mood-journal.entitlements"; sourceTree = "<group>"; };
+		10000000000000000000000E /* mood-journal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mood-journal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		10000000000000000000000F /* mood-journalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mood-journalTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		100000000000000000000501 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		100000000000000000000502 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		100000000000000000000601 = {
+			isa = PBXGroup;
+			children = (
+				100000000000000000000602 /* mood-journal */,
+				100000000000000000000607 /* mood-journalTests */,
+				100000000000000000000608 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		100000000000000000000602 /* mood-journal */ = {
+			isa = PBXGroup;
+			children = (
+				100000000000000000000001 /* MoodJournalApp.swift */,
+				100000000000000000000603 /* Models */,
+				100000000000000000000604 /* Services */,
+				100000000000000000000605 /* Utilities */,
+				100000000000000000000606 /* ViewModels */,
+				100000000000000000000609 /* Views */,
+				10000000000000000000000C /* Info.plist */,
+				10000000000000000000000D /* mood-journal.entitlements */,
+			);
+			path = "mood-journal";
+			sourceTree = "<group>";
+		};
+		100000000000000000000603 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				100000000000000000000002 /* MoodModels.swift */,
+				100000000000000000000003 /* DiaryNote.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		100000000000000000000604 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				100000000000000000000006 /* HealthKitService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		100000000000000000000605 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				100000000000000000000004 /* Color+MoodJournal.swift */,
+				100000000000000000000005 /* MoodAnalytics.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		100000000000000000000606 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				100000000000000000000007 /* MoodJournalViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		100000000000000000000607 /* mood-journalTests */ = {
+			isa = PBXGroup;
+			children = (
+				10000000000000000000000B /* MoodAnalyticsTests.swift */,
+			);
+			path = "mood-journalTests";
+			sourceTree = "<group>";
+		};
+		100000000000000000000608 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				10000000000000000000000E /* mood-journal.app */,
+				10000000000000000000000F /* mood-journalTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		100000000000000000000609 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				100000000000000000000008 /* RootView.swift */,
+				100000000000000000000009 /* ChartsDashboardView.swift */,
+				10000000000000000000000A /* DiaryTableView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		100000000000000000000401 /* mood-journal */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 100000000000000000000701 /* Build configuration list for PBXNativeTarget "mood-journal" */;
+			buildPhases = (
+				100000000000000000000801 /* Sources */,
+				100000000000000000000501 /* Frameworks */,
+				100000000000000000000901 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "mood-journal";
+			productName = "mood-journal";
+			productReference = 10000000000000000000000E /* mood-journal.app */;
+			productType = "com.apple.product-type.application";
+		};
+		100000000000000000000402 /* mood-journalTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 100000000000000000000702 /* Build configuration list for PBXNativeTarget "mood-journalTests" */;
+			buildPhases = (
+				100000000000000000000802 /* Sources */,
+				100000000000000000000502 /* Frameworks */,
+				100000000000000000000902 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				100000000000000000000202 /* PBXTargetDependency */,
+			);
+			name = "mood-journalTests";
+			productName = "mood-journalTests";
+			productReference = 10000000000000000000000F /* mood-journalTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		100000000000000000000301 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2650;
+				LastUpgradeCheck = 2650;
+				TargetAttributes = {
+					100000000000000000000401 = {
+						CreatedOnToolsVersion = 26.0;
+						SystemCapabilities = {
+							com.apple.HealthKit = {
+								enabled = 1;
+							};
+						};
+					};
+					100000000000000000000402 = {
+						CreatedOnToolsVersion = 26.0;
+						TestTargetID = 100000000000000000000401;
+					};
+				};
+			};
+			buildConfigurationList = 100000000000000000000703 /* Build configuration list for PBXProject "mood-journal" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 100000000000000000000601;
+			productRefGroup = 100000000000000000000608 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				100000000000000000000401 /* mood-journal */,
+				100000000000000000000402 /* mood-journalTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		100000000000000000000901 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		100000000000000000000902 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		100000000000000000000801 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				100000000000000000000101 /* MoodJournalApp.swift in Sources */,
+				100000000000000000000102 /* MoodModels.swift in Sources */,
+				100000000000000000000103 /* DiaryNote.swift in Sources */,
+				100000000000000000000104 /* Color+MoodJournal.swift in Sources */,
+				100000000000000000000105 /* MoodAnalytics.swift in Sources */,
+				100000000000000000000106 /* HealthKitService.swift in Sources */,
+				100000000000000000000107 /* MoodJournalViewModel.swift in Sources */,
+				100000000000000000000108 /* RootView.swift in Sources */,
+				100000000000000000000109 /* ChartsDashboardView.swift in Sources */,
+				10000000000000000000010A /* DiaryTableView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		100000000000000000000802 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				10000000000000000000010B /* MoodAnalyticsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		100000000000000000000202 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 100000000000000000000401 /* mood-journal */;
+			targetProxy = 100000000000000000000201 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		100000000000000000000A01 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		100000000000000000000A02 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		100000000000000000000A03 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				CODE_SIGN_ENTITLEMENTS = "mood-journal/mood-journal.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "mood-journal/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.moodjournal;
+				PRODUCT_MODULE_NAME = mood_journal;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		100000000000000000000A04 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				CODE_SIGN_ENTITLEMENTS = "mood-journal/mood-journal.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "mood-journal/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.moodjournal;
+				PRODUCT_MODULE_NAME = mood_journal;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		100000000000000000000A05 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.moodjournal.tests";
+				PRODUCT_MODULE_NAME = mood_journalTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mood-journal.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/mood-journal";
+			};
+			name = Debug;
+		};
+		100000000000000000000A06 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.moodjournal.tests";
+				PRODUCT_MODULE_NAME = mood_journalTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mood-journal.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/mood-journal";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		100000000000000000000701 /* Build configuration list for PBXNativeTarget "mood-journal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				100000000000000000000A03 /* Debug */,
+				100000000000000000000A04 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		100000000000000000000702 /* Build configuration list for PBXNativeTarget "mood-journalTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				100000000000000000000A05 /* Debug */,
+				100000000000000000000A06 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		100000000000000000000703 /* Build configuration list for PBXProject "mood-journal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				100000000000000000000A01 /* Debug */,
+				100000000000000000000A02 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 100000000000000000000301 /* Project object */;
+}
