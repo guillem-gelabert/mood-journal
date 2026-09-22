@@ -5,35 +5,34 @@ struct ChartsDashboardView: View {
     var data: ChartData
 
     var body: some View {
-        NavigationStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 24) {
-                    MoodOverTimeChart(
-                        checkIns: data.checkIns,
-                        rolling: data.rollingMood,
-                        bands: data.moodBands,
-                        monthStarts: data.monthStarts,
-                        fifteenthDates: data.fifteenthDates,
-                        subtitle: "\(data.dateRangeSubtitle) - \(data.checkIns.count) check-ins"
-                    )
+        ScrollView {
+            VStack(alignment: .leading, spacing: 24) {
+                MoodOverTimeChart(
+                    checkIns: data.checkIns,
+                    rolling: data.rollingMood,
+                    bands: data.moodBands,
+                    monthStarts: data.monthStarts,
+                    fifteenthDates: data.fifteenthDates,
+                    subtitle: "\(data.dateRangeSubtitle) - \(data.checkIns.count) check-ins"
+                )
 
-                    MoodByWeekdayChart(
-                        samples: data.weekdaySamples,
-                        stats: data.weekdayStats,
-                        subtitle: "\(data.dateRangeSubtitle) - Monday first"
-                    )
+                MoodByWeekdayChart(
+                    samples: data.weekdaySamples,
+                    stats: data.weekdayStats,
+                    subtitle: "\(data.dateRangeSubtitle) - Monday first"
+                )
 
-                    ActiveEnergyChart(
-                        energy: data.dailyEnergy,
-                        rolling: data.rollingEnergy,
-                        subtitle: "\(data.dateRangeSubtitle) - \(data.dailyEnergy.count) days"
-                    )
-                }
-                .padding()
+                ActiveEnergyChart(
+                    energy: data.dailyEnergy,
+                    rolling: data.rollingEnergy,
+                    subtitle: "\(data.dateRangeSubtitle) - \(data.dailyEnergy.count) days"
+                )
             }
-            .background(Color.journalBackground)
-            .navigationTitle("Mood Journal")
+            .padding()
         }
+        .background(Color.journalBackground)
+        .navigationTitle("Charts")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
