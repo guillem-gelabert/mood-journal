@@ -3,22 +3,8 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 77;
 	objects = {
-
-/* Begin PBXBuildFile section */
-		100000000000000000000101 /* MoodJournalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000001 /* MoodJournalApp.swift */; };
-		100000000000000000000102 /* MoodModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000002 /* MoodModels.swift */; };
-		100000000000000000000103 /* DiaryNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000003 /* DiaryNote.swift */; };
-		100000000000000000000104 /* Color+MoodJournal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000004 /* Color+MoodJournal.swift */; };
-		100000000000000000000105 /* MoodAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000005 /* MoodAnalytics.swift */; };
-		100000000000000000000106 /* HealthKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000006 /* HealthKitService.swift */; };
-		100000000000000000000107 /* MoodJournalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000007 /* MoodJournalViewModel.swift */; };
-		100000000000000000000108 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000008 /* RootView.swift */; };
-		100000000000000000000109 /* ChartsDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000009 /* ChartsDashboardView.swift */; };
-		10000000000000000000010A /* DiaryTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10000000000000000000000A /* DiaryTableView.swift */; };
-		10000000000000000000010B /* MoodAnalyticsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10000000000000000000000B /* MoodAnalyticsTests.swift */; };
-/* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		100000000000000000000201 /* PBXContainerItemProxy */ = {
@@ -31,19 +17,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		100000000000000000000001 /* MoodJournalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodJournalApp.swift; sourceTree = "<group>"; };
-		100000000000000000000002 /* MoodModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodModels.swift; sourceTree = "<group>"; };
-		100000000000000000000003 /* DiaryNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryNote.swift; sourceTree = "<group>"; };
-		100000000000000000000004 /* Color+MoodJournal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+MoodJournal.swift"; sourceTree = "<group>"; };
-		100000000000000000000005 /* MoodAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodAnalytics.swift; sourceTree = "<group>"; };
-		100000000000000000000006 /* HealthKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitService.swift; sourceTree = "<group>"; };
-		100000000000000000000007 /* MoodJournalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodJournalViewModel.swift; sourceTree = "<group>"; };
-		100000000000000000000008 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
-		100000000000000000000009 /* ChartsDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsDashboardView.swift; sourceTree = "<group>"; };
-		10000000000000000000000A /* DiaryTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryTableView.swift; sourceTree = "<group>"; };
-		10000000000000000000000B /* MoodAnalyticsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodAnalyticsTests.swift; sourceTree = "<group>"; };
-		10000000000000000000000C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		10000000000000000000000D /* mood-journal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "mood-journal.entitlements"; sourceTree = "<group>"; };
 		10000000000000000000000E /* mood-journal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mood-journal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		10000000000000000000000F /* mood-journalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mood-journalTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -65,71 +38,41 @@
 		};
 /* End PBXFrameworksBuildPhase section */
 
-/* Begin PBXGroup section */
-		100000000000000000000601 = {
-			isa = PBXGroup;
-			children = (
-				100000000000000000000602 /* mood-journal */,
-				100000000000000000000607 /* mood-journalTests */,
-				100000000000000000000608 /* Products */,
-			);
-			sourceTree = "<group>";
-		};
-		100000000000000000000602 /* mood-journal */ = {
-			isa = PBXGroup;
-			children = (
-				100000000000000000000001 /* MoodJournalApp.swift */,
-				100000000000000000000603 /* Models */,
-				100000000000000000000604 /* Services */,
-				100000000000000000000605 /* Utilities */,
-				100000000000000000000606 /* ViewModels */,
-				100000000000000000000609 /* Views */,
-				10000000000000000000000C /* Info.plist */,
-				10000000000000000000000D /* mood-journal.entitlements */,
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		100000000000000000000B01 /* mood-journal */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				100000000000000000000C01 /* Exceptions for "mood-journal" folder in "mood-journal" target */,
 			);
 			path = "mood-journal";
 			sourceTree = "<group>";
 		};
-		100000000000000000000603 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				100000000000000000000002 /* MoodModels.swift */,
-				100000000000000000000003 /* DiaryNote.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		100000000000000000000604 /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				100000000000000000000006 /* HealthKitService.swift */,
-			);
-			path = Services;
-			sourceTree = "<group>";
-		};
-		100000000000000000000605 /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-				100000000000000000000004 /* Color+MoodJournal.swift */,
-				100000000000000000000005 /* MoodAnalytics.swift */,
-			);
-			path = Utilities;
-			sourceTree = "<group>";
-		};
-		100000000000000000000606 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				100000000000000000000007 /* MoodJournalViewModel.swift */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		100000000000000000000607 /* mood-journalTests */ = {
-			isa = PBXGroup;
-			children = (
-				10000000000000000000000B /* MoodAnalyticsTests.swift */,
-			);
+		100000000000000000000B02 /* mood-journalTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "mood-journalTests";
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		100000000000000000000C01 /* Exceptions for "mood-journal" folder in "mood-journal" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+				"mood-journal.entitlements",
+			);
+			target = 100000000000000000000401 /* mood-journal */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXGroup section */
+		100000000000000000000601 = {
+			isa = PBXGroup;
+			children = (
+				100000000000000000000B01 /* mood-journal */,
+				100000000000000000000B02 /* mood-journalTests */,
+				100000000000000000000608 /* Products */,
+			);
 			sourceTree = "<group>";
 		};
 		100000000000000000000608 /* Products */ = {
@@ -141,21 +84,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		100000000000000000000609 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				100000000000000000000008 /* RootView.swift */,
-				100000000000000000000009 /* ChartsDashboardView.swift */,
-				10000000000000000000000A /* DiaryTableView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
 		100000000000000000000401 /* mood-journal */ = {
 			isa = PBXNativeTarget;
+			fileSystemSynchronizedGroups = (
+				100000000000000000000B01 /* mood-journal */,
+			);
 			buildConfigurationList = 100000000000000000000701 /* Build configuration list for PBXNativeTarget "mood-journal" */;
 			buildPhases = (
 				100000000000000000000801 /* Sources */,
@@ -173,6 +109,9 @@
 		};
 		100000000000000000000402 /* mood-journalTests */ = {
 			isa = PBXNativeTarget;
+			fileSystemSynchronizedGroups = (
+				100000000000000000000B02 /* mood-journalTests */,
+			);
 			buildConfigurationList = 100000000000000000000702 /* Build configuration list for PBXNativeTarget "mood-journalTests" */;
 			buildPhases = (
 				100000000000000000000802 /* Sources */,
@@ -214,7 +153,6 @@
 				};
 			};
 			buildConfigurationList = 100000000000000000000703 /* Build configuration list for PBXProject "mood-journal" */;
-			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -254,16 +192,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				100000000000000000000101 /* MoodJournalApp.swift in Sources */,
-				100000000000000000000102 /* MoodModels.swift in Sources */,
-				100000000000000000000103 /* DiaryNote.swift in Sources */,
-				100000000000000000000104 /* Color+MoodJournal.swift in Sources */,
-				100000000000000000000105 /* MoodAnalytics.swift in Sources */,
-				100000000000000000000106 /* HealthKitService.swift in Sources */,
-				100000000000000000000107 /* MoodJournalViewModel.swift in Sources */,
-				100000000000000000000108 /* RootView.swift in Sources */,
-				100000000000000000000109 /* ChartsDashboardView.swift in Sources */,
-				10000000000000000000010A /* DiaryTableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,7 +199,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				10000000000000000000010B /* MoodAnalyticsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
