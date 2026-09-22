@@ -9,12 +9,22 @@ struct ExportReportView: View {
     @State private var reportURL: URL?
     @State private var isGenerating = false
     @State private var errorMessage: String?
+    @AppStorage("export.lastExportedAt") private var lastExportedAtStamp: Double = 0
 
     init(store: MoodDataStore) {
         self.store = store
         let interval = store.chartData.interval
         _start = State(initialValue: interval?.start ?? Calendar.current.date(byAdding: .day, value: -90, to: Date()) ?? Date())
-        _end = State(initialValue: (interval?.end ?? Date()).addingTimeInterval(-1))
+        _end = State(initialValue: min((interval?.end ?? Date()).addingTimeInterval(-1), Date()))
+    }
+
+    private var lastExportedAt: Date? {
+        lastExportedAtStamp > 0 ? Date(timeIntervalSince1970: lastExportedAtStamp) : nil
+    }
+
+    /// Today, or the current selection if it somehow sits later, so the bound is never empty.
+    private var latestSelectableDate: Date {
+        max(start, Date())
     }
 
     var body: some View {
@@ -22,7 +32,14 @@ struct ExportReportView: View {
             Form {
                 Section("Range") {
                     DatePicker("From", selection: $start, in: ...end, displayedComponents: .date)
-                    DatePicker("To", selection: $end, in: start..., displayedComponents: .date)
+                    // Capped at today: Health holds nothing later, so a future date would
+                    // only ever widen the range with empty days.
+                    DatePicker("To", selection: $end, in: start...latestSelectableDate, displayedComponents: .date)
+
+                    if let lastExportedAt {
+                        LabeledContent("Last exported", value: Self.dateFormatter.string(from: lastExportedAt))
+                            .foregroundStyle(.secondary)
+                    }
                 }
 
                 Section {
@@ -61,6 +78,13 @@ struct ExportReportView: View {
         }
     }
 
+    private static let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        return formatter
+    }()
+
     private func generate() async {
         isGenerating = true
         errorMessage = nil
@@ -87,6 +111,7 @@ struct ExportReportView: View {
                 ChartReportRequest(data: data, adherence: store.adherence, generatedAt: generatedAt),
                 to: ChartReportPDFRenderer.defaultURL(for: generatedAt)
             )
+            lastExportedAtStamp = generatedAt.timeIntervalSince1970
         } catch {
             errorMessage = error.localizedDescription
         }
