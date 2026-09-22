@@ -18,12 +18,31 @@ enum MoodAnalytics {
         func inRange(_ date: Date) -> Bool { date >= interval.start && date < interval.end }
 
         let checkIns = snapshot.moodCheckIns.filter { inRange($0.date) }
+        let energy = snapshot.dailyEnergy.filter { inRange($0.date) }
+        let sleep = snapshot.sleepNights.filter { inRange($0.date) }
         let rangeDays = calendar.dateComponents([.day], from: interval.start, to: interval.end).day ?? 0
+
+        // One shared extent across every series, so the charts stay vertically comparable
+        // while still stretching to fill the width when history is shorter than the range.
+        let sampleDates = checkIns.map(\.date) + energy.map(\.date) + sleep.map(\.date)
+        let dataInterval: DateInterval? = sampleDates.min().flatMap { earliest in
+            sampleDates.max().flatMap { latest in
+                let start = calendar.startOfDay(for: earliest)
+                guard let end = calendar.date(byAdding: .day, value: 1, to: calendar.startOfDay(for: latest)),
+                      start < end
+                else {
+                    return nil
+                }
+                return DateInterval(start: start, end: min(end, interval.end))
+            }
+        }
+        let dataStart = dataInterval?.start ?? interval.start
+        let dataEnd = dataInterval?.end ?? interval.end
 
         return ChartData(
             checkIns: checkIns,
-            dailyEnergy: snapshot.dailyEnergy.filter { inRange($0.date) },
-            sleepNights: snapshot.sleepNights.filter { inRange($0.date) },
+            dailyEnergy: energy,
+            sleepNights: sleep,
             rollingMood: centeredRollingDailyMean(checkIns: snapshot.moodCheckIns, calendar: calendar)
                 .filter { inRange($0.date) },
             moodBands: centeredRawStandardDeviationBand(checkIns: snapshot.moodCheckIns, calendar: calendar)
@@ -39,9 +58,10 @@ enum MoodAnalytics {
                 recentWindowDays: max(14, rangeDays / 4),
                 calendar: calendar
             ),
-            monthStarts: monthStarts(from: interval.start, through: interval.end, calendar: calendar),
-            fifteenthDates: fifteenthOfMonths(from: interval.start, through: interval.end, calendar: calendar),
-            interval: interval
+            monthStarts: monthStarts(from: dataStart, through: dataEnd, calendar: calendar),
+            fifteenthDates: fifteenthOfMonths(from: dataStart, through: dataEnd, calendar: calendar),
+            interval: interval,
+            dataInterval: dataInterval
         )
     }
 

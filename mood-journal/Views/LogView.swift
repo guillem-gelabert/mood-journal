@@ -9,32 +9,7 @@ struct LogView: View {
         NavigationStack {
             ZStack {
                 Color.journalBackground.ignoresSafeArea()
-
-                VStack(spacing: 32) {
-                    Spacer()
-
-                    Text(model.classification.rawValue)
-                        .font(.system(.title, design: .serif).italic())
-                        .foregroundStyle(model.classification.color)
-                        .contentTransition(.opacity)
-                        .animation(.easeOut(duration: 0.15), value: model.classification)
-
-                    ValenceSlider(valence: $model.valence)
-
-                    logButton
-
-                    if case .failed(let message) = model.phase {
-                        Text(message)
-                            .font(.caption)
-                            .foregroundStyle(.journalInk.opacity(0.75))
-                            .multilineTextAlignment(.center)
-                            .onTapGesture { model.dismissFailure() }
-                    }
-
-                    Spacer()
-                    Spacer()
-                }
-                .padding(28)
+                LogControls(model: model)
             }
             .navigationTitle("How are you?")
             .navigationBarTitleDisplayMode(.inline)
@@ -52,6 +27,40 @@ struct LogView: View {
         .font(.system(.body, design: .monospaced))
         .task { await model.prepare() }
     }
+}
+
+/// The log screen's content, separate from its navigation shell so it can be rendered on its
+/// own — NavigationStack is UIKit-backed and rasterises as a placeholder.
+struct LogControls: View {
+    @Bindable var model: LogEntryModel
+
+    var body: some View {
+        VStack(spacing: 36) {
+            Spacer()
+
+            Text(model.classification.rawValue)
+                .font(.system(.title, design: .serif).italic())
+                .foregroundStyle(model.classification.color)
+                .contentTransition(.opacity)
+                .animation(.easeOut(duration: 0.15), value: model.classification)
+
+            ValenceSlider(valence: $model.valence)
+
+            logButton
+
+            if case .failed(let message) = model.phase {
+                Text(message)
+                    .font(.caption)
+                    .foregroundStyle(.journalInk.opacity(0.75))
+                    .multilineTextAlignment(.center)
+                    .onTapGesture { model.dismissFailure() }
+            }
+
+            Spacer()
+            Spacer()
+        }
+        .padding(28)
+    }
 
     private var logButton: some View {
         Button {
@@ -67,9 +76,11 @@ struct LogView: View {
                     Text("Log")
                 }
             }
-            .frame(maxWidth: .infinity, minHeight: 26)
+            .font(.system(.title3, design: .monospaced).weight(.medium))
+            .frame(maxWidth: .infinity, minHeight: 54)
         }
         .buttonStyle(.borderedProminent)
+        .controlSize(.large)
         .tint(.journalInk)
         .disabled(model.phase == .saving || model.phase == .saved)
         .sensoryFeedback(.success, trigger: model.phase == .saved)

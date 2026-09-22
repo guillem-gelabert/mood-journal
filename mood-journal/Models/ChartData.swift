@@ -17,28 +17,34 @@ struct ChartData: Equatable {
     var monthStarts: [Date] = []
     var fifteenthDates: [Date] = []
     var interval: DateInterval?
+    /// The extent actually covered by loaded samples, clipped to `interval`. Nil when the
+    /// range holds no data at all.
+    var dataInterval: DateInterval?
 
     static let empty = ChartData()
 
     /// Every time-series chart shares this, so they stay vertically comparable and the PDF
     /// renders the same window the screen showed.
+    ///
+    /// Follows the data rather than the picked range: choosing 1Y with six months of history
+    /// draws six months across the full width instead of half a chart and half a void.
     var domain: ClosedRange<Date> {
-        guard let interval else {
+        guard let effective = dataInterval ?? interval else {
             let now = Date()
             return now...now.addingTimeInterval(1)
         }
-        return interval.start...interval.end
+        return effective.start...effective.end
     }
 
     var dayCount: Int {
-        guard let interval else { return 0 }
-        return Calendar.current.dateComponents([.day], from: interval.start, to: interval.end).day ?? 0
+        guard let effective = dataInterval ?? interval else { return 0 }
+        return Calendar.current.dateComponents([.day], from: effective.start, to: effective.end).day ?? 0
     }
 
     var dateRangeSubtitle: String {
-        guard let interval else { return "No loaded data" }
-        let lastDay = interval.end.addingTimeInterval(-1)
-        return "\(Self.dateFormatter.string(from: interval.start)) - \(Self.dateFormatter.string(from: lastDay))"
+        guard let effective = dataInterval ?? interval else { return "No loaded data" }
+        let lastDay = effective.end.addingTimeInterval(-1)
+        return "\(Self.dateFormatter.string(from: effective.start)) - \(Self.dateFormatter.string(from: lastDay))"
     }
 
     private static let dateFormatter: DateFormatter = {

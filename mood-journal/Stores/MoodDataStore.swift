@@ -78,6 +78,20 @@ final class MoodDataStore {
         }
     }
 
+    /// Derives chart data for an arbitrary interval without disturbing what the charts show.
+    /// Used by the PDF export, whose range is chosen independently of the picker.
+    func chartData(for interval: DateInterval) async -> ChartData? {
+        let radius = MoodAnalytics.rollingWindowRadiusInDays
+        guard
+            let fetchStart = calendar.date(byAdding: .day, value: -radius, to: interval.start),
+            let fetchEnd = calendar.date(byAdding: .day, value: radius, to: interval.end),
+            let snapshot = try? await service.loadSnapshot(from: fetchStart, to: fetchEnd, calendar: calendar)
+        else {
+            return nil
+        }
+        return MoodAnalytics.derive(snapshot: snapshot, interval: interval, calendar: calendar)
+    }
+
     /// Updates the prompt ledger, then recomputes Momentum and Resilience from it.
     /// Separate from `refresh()` because it deliberately ignores the chart range.
     func updateAdherence(reminders: [Reminder]) async {

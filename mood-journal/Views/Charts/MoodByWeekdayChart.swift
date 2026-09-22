@@ -25,6 +25,7 @@ struct MoodByWeekdayChart: View {
                     )
                     .foregroundStyle(MoodAnalytics.chartClassification(for: sample.valence).color.opacity(0.86))
                     .symbolSize(38)
+                    .zIndex(0)
                 }
 
                 ForEach(stats) { stat in
@@ -34,27 +35,33 @@ struct MoodByWeekdayChart: View {
                         yStart: .value("Mean low", stat.overallMean - 0.006),
                         yEnd: .value("Mean high", stat.overallMean + 0.006)
                     )
-                    .foregroundStyle(Color.black)
+                    .foregroundStyle(Color.journalInk)
+                    .zIndex(1)
 
                     if let recent = stat.recentMean, abs(recent - stat.overallMean) >= 0.03 {
+                        // The shaft stops short of the recent value so the head, drawn as an
+                        // overlay centred there, completes the arrow instead of floating past it.
                         RectangleMark(
                             xStart: .value("Arrow x0", Double(stat.weekdayIndex) - 0.018),
                             xEnd: .value("Arrow x1", Double(stat.weekdayIndex) + 0.018),
                             yStart: .value("Overall", stat.overallMean),
-                            yEnd: .value("Recent", recent)
+                            yEnd: .value("Recent", recent + (recent > stat.overallMean ? -0.035 : 0.035))
                         )
-                        .foregroundStyle(Color.black.opacity(0.55))
+                        .foregroundStyle(Color.journalInk)
+                        .zIndex(2)
 
                         PointMark(
                             x: .value("Weekday", Double(stat.weekdayIndex)),
                             y: .value("Recent", recent)
                         )
                         .foregroundStyle(Color.clear)
-                        .annotation(position: recent > stat.overallMean ? .top : .bottom) {
-                            Image(systemName: recent > stat.overallMean ? "arrow.up" : "arrow.down")
-                                .font(.caption2)
+                        .symbolSize(0)
+                        .annotation(position: .overlay, alignment: .center, spacing: 0) {
+                            Image(systemName: recent > stat.overallMean ? "arrowtriangle.up.fill" : "arrowtriangle.down.fill")
+                                .font(.system(size: 9))
                                 .foregroundStyle(Color.journalInk)
                         }
+                        .zIndex(3)
                     }
                 }
             }
