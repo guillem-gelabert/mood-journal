@@ -39,4 +39,5 @@ extension ShapeStyle where Self == Color {
     static var journalInk: Color { Color(hex: "3a3530") }
     static var journalBand: Color { Color(hex: "d5d0c8") }
     static var journalEnergy: Color { Color(hex: "8a9a72") }
+    static var journalSleep: Color { Color(hex: "6b7f9e") }
 }

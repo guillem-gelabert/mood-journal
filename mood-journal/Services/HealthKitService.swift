@@ -145,7 +145,9 @@ final class HealthKitService {
                     return
                 }
 
-                var hoursByDay: [Date: Double] = [:]
+                // Collected as intervals rather than summed durations: two sources writing
+                // sleep produce overlapping samples, which naive summing counts twice.
+                var intervalsByDay: [Date: [DateInterval]] = [:]
                 for sample in samples as? [HKCategorySample] ?? [] {
                     guard
                         let value = HKCategoryValueSleepAnalysis(rawValue: sample.value),
@@ -156,12 +158,14 @@ final class HealthKitService {
 
                     let assignedDay = calendar.startOfDay(for: sample.endDate)
                     guard assignedDay >= calendar.startOfDay(for: startDate) else { continue }
-                    let hours = sample.endDate.timeIntervalSince(sample.startDate) / 3600
-                    hoursByDay[assignedDay, default: 0] += hours
+                    guard sample.endDate > sample.startDate else { continue }
+                    intervalsByDay[assignedDay, default: []]
+                        .append(DateInterval(start: sample.startDate, end: sample.endDate))
                 }
 
-                let result = hoursByDay.keys.sorted().map {
-                    SleepNight(date: $0, hours: hoursByDay[$0] ?? 0)
+                let result = intervalsByDay.keys.sorted().map { day in
+                    let seconds = DateIntervalMerging.mergedDuration(of: intervalsByDay[day] ?? [])
+                    return SleepNight(date: day, hours: seconds / 3600)
                 }
                 continuation.resume(returning: result)
             }

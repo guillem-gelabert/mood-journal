@@ -11,6 +11,7 @@ struct ChartData: Equatable {
     var rollingMood: [RollingMoodPoint] = []
     var moodBands: [RollingMoodBand] = []
     var rollingEnergy: [DailyEnergy] = []
+    var rollingSleep: [SleepNight] = []
     var weekdaySamples: [WeekdayMoodSample] = []
     var weekdayStats: [WeekdayMoodStat] = []
     var monthStarts: [Date] = []

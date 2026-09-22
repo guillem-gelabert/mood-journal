@@ -30,6 +30,8 @@ enum MoodAnalytics {
                 .filter { inRange($0.date) },
             rollingEnergy: rollingEnergyAverage(values: snapshot.dailyEnergy, calendar: calendar)
                 .filter { inRange($0.date) },
+            rollingSleep: rollingSleepAverage(values: snapshot.sleepNights, calendar: calendar)
+                .filter { inRange($0.date) },
             weekdaySamples: weekdaySamples(checkIns: checkIns, calendar: calendar),
             weekdayStats: weekdayStats(
                 checkIns: checkIns,
@@ -104,12 +106,40 @@ enum MoodAnalytics {
         calendar: Calendar = .current,
         radiusInDays: Int = rollingWindowRadiusInDays
     ) -> [DailyEnergy] {
-        let byDay = Dictionary(uniqueKeysWithValues: values.map { (calendar.startOfDay(for: $0.date), $0.kilojoules) })
+        rollingDailyMean(values.map { ($0.date, $0.kilojoules) }, calendar: calendar, radiusInDays: radiusInDays)
+            .map { DailyEnergy(date: $0.date, kilojoules: $0.value) }
+    }
+
+    static func rollingSleepAverage(
+        values: [SleepNight],
+        calendar: Calendar = .current,
+        radiusInDays: Int = rollingWindowRadiusInDays
+    ) -> [SleepNight] {
+        rollingDailyMean(values.map { ($0.date, $0.hours) }, calendar: calendar, radiusInDays: radiusInDays)
+            .map { SleepNight(date: $0.date, hours: $0.value) }
+    }
+
+    /// Centred rolling mean over one value per day. Days that share a start-of-day are
+    /// averaged rather than colliding, which the previous uniqueKeysWithValues would have
+    /// trapped on.
+    private static func rollingDailyMean(
+        _ points: [(date: Date, value: Double)],
+        calendar: Calendar,
+        radiusInDays: Int
+    ) -> [(date: Date, value: Double)] {
+        var sums: [Date: (total: Double, count: Int)] = [:]
+        for point in points {
+            let day = calendar.startOfDay(for: point.date)
+            let existing = sums[day] ?? (0, 0)
+            sums[day] = (existing.total + point.value, existing.count + 1)
+        }
+        let byDay = sums.mapValues { $0.total / Double($0.count) }
+
         return byDay.keys.sorted().compactMap { day in
             let windowDays = datesAround(day, radiusInDays: radiusInDays, calendar: calendar)
             let windowValues = windowDays.compactMap { byDay[$0] }
             guard !windowValues.isEmpty else { return nil }
-            return DailyEnergy(date: day, kilojoules: windowValues.reduce(0, +) / Double(windowValues.count))
+            return (day, windowValues.reduce(0, +) / Double(windowValues.count))
         }
     }
 

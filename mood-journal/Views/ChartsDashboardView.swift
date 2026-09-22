@@ -44,6 +44,14 @@ struct ChartsDashboardView: View {
                     interpolation: data.interpolation,
                     subtitle: "\(data.dateRangeSubtitle) - \(data.dailyEnergy.count) days"
                 )
+
+                SleepChart(
+                    nights: data.sleepNights,
+                    rolling: data.rollingSleep,
+                    domain: data.domain,
+                    interpolation: data.interpolation,
+                    subtitle: "\(data.dateRangeSubtitle) - \(data.sleepNights.count) nights"
+                )
             }
             .padding()
         }
