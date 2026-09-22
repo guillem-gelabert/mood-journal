@@ -3,6 +3,7 @@ import SwiftUI
 struct LogView: View {
     @Bindable var model: LogEntryModel
     var store: MoodDataStore
+    var reminders: RemindersModel
 
     var body: some View {
         NavigationStack {
@@ -40,7 +41,7 @@ struct LogView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     NavigationLink {
-                        SettingsView(store: store)
+                        SettingsView(store: store, reminders: reminders)
                     } label: {
                         Image(systemName: "gearshape")
                     }

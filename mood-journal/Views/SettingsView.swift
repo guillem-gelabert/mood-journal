@@ -4,6 +4,7 @@ import UIKit
 
 struct SettingsView: View {
     var store: MoodDataStore
+    var reminders: RemindersModel
 
     var body: some View {
         Form {
@@ -13,6 +14,12 @@ struct SettingsView: View {
                         .task { await store.refresh() }
                 } label: {
                     Label("Charts", systemImage: "chart.xyaxis.line")
+                }
+
+                NavigationLink {
+                    RemindersView(model: reminders)
+                } label: {
+                    Label("Reminders", systemImage: "bell")
                 }
             }
 
