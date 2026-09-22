@@ -7,6 +7,7 @@ struct ActiveEnergyChart: View {
     var domain: ClosedRange<Date>
     var interpolation: InterpolationMethod
     var subtitle: String
+    var height: CGFloat = 240
 
     var body: some View {
         ChartPanel(title: "Active energy", subtitle: subtitle) {
@@ -38,7 +39,7 @@ struct ActiveEnergyChart: View {
                 }
             }
             .chartYAxisLabel("kJ", position: .leading)
-            .frame(height: 240)
+            .frame(height: height)
         }
     }
 }

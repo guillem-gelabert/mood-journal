@@ -11,6 +11,7 @@ struct MoodOverTimeChart: View {
     var interpolation: InterpolationMethod
     var subtitle: String
     var isInteractive = true
+    var height: CGFloat = 280
 
     @State private var selected: MoodCheckIn?
 
@@ -85,7 +86,7 @@ struct MoodOverTimeChart: View {
                     }
                 }
             }
-            .frame(height: 280)
+            .frame(height: height)
         }
     }
 

@@ -5,6 +5,7 @@ struct MoodByWeekdayChart: View {
     var samples: [WeekdayMoodSample]
     var stats: [WeekdayMoodStat]
     var subtitle: String
+    var height: CGFloat = 260
 
     var body: some View {
         ChartPanel(title: "Mood by weekday", subtitle: subtitle) {
@@ -73,7 +74,7 @@ struct MoodByWeekdayChart: View {
             .chartYAxis {
                 AxisMarks(position: .leading)
             }
-            .frame(height: 260)
+            .frame(height: height)
         }
     }
 }

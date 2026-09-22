@@ -7,6 +7,7 @@ struct SleepChart: View {
     var domain: ClosedRange<Date>
     var interpolation: InterpolationMethod
     var subtitle: String
+    var height: CGFloat = 240
 
     var body: some View {
         ChartPanel(title: "Sleep", subtitle: subtitle) {
@@ -39,7 +40,7 @@ struct SleepChart: View {
                 AxisMarks(position: .leading)
             }
             .chartYAxisLabel("h", position: .leading)
-            .frame(height: 240)
+            .frame(height: height)
         }
     }
 
