@@ -16,18 +16,7 @@ struct RootView: View {
                     Task { await viewModel.refresh() }
                 }
             } else {
-                TabView {
-                    ChartsDashboardView(viewModel: viewModel)
-                        .tabItem {
-                            Label("Charts", systemImage: "chart.xyaxis.line")
-                        }
-
-                    DiaryTableView(days: viewModel.diaryDays)
-                        .tabItem {
-                            Label("Diary", systemImage: "tablecells")
-                        }
-                }
-                .tint(.journalInk)
+                ChartsDashboardView(viewModel: viewModel)
             }
 
             if viewModel.isLoading {

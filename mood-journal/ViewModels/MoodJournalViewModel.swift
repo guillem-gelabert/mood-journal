@@ -25,19 +25,6 @@ final class MoodJournalViewModel: ObservableObject {
         return "\(Self.dateFormatter.string(from: start)) - \(Self.dateFormatter.string(from: end))"
     }
 
-    var diaryDays: [DiaryDay] {
-        let end = windowEndDate() ?? Date()
-        let start = windowStartDate() ?? calendar.date(byAdding: .day, value: -Self.historyWindowDays, to: end) ?? end
-        return MoodAnalytics.diaryDays(
-            checkIns: checkIns,
-            sleep: sleepNights,
-            energy: dailyEnergy,
-            startDate: start,
-            endDate: end,
-            calendar: calendar
-        )
-    }
-
     var rollingMood: [RollingMoodPoint] {
         MoodAnalytics.centeredRollingDailyMean(checkIns: checkIns, calendar: calendar)
     }

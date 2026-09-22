@@ -1,45 +1,6 @@
 import Foundation
 import SwiftUI
 
-enum TimeOfDaySlot: String, CaseIterable, Identifiable, Codable {
-    case morning = "Morning"
-    case midday = "Midday"
-    case evening = "Evening"
-
-    var id: String { rawValue }
-}
-
-struct DiaryTimeBoundaries: Equatable {
-    var morningEndHour = 13
-    var middayEndHour = 18
-
-    static let standard = DiaryTimeBoundaries()
-}
-
-enum DiaryMoodBucket: String, CaseIterable, Codable {
-    case veryGood = "very good"
-    case good
-    case normal
-    case bad
-    case veryBad = "very bad"
-
-    var color: Color {
-        switch self {
-        case .veryGood: Color(hex: "7ecfa0")
-        case .good: Color(hex: "5b9e76")
-        case .normal: Color(hex: "7a7568")
-        case .bad: Color(hex: "c45d4e")
-        case .veryBad: Color(hex: "a33038")
-        }
-    }
-}
-
-enum ActivityBucket: String, CaseIterable, Codable {
-    case high
-    case normal
-    case low
-}
-
 enum MoodChartClassification: String, CaseIterable, Codable {
     case veryPleasant = "Very Pleasant"
     case pleasant = "Pleasant"
@@ -88,24 +49,6 @@ struct DailyEnergy: Identifiable, Equatable {
 struct SleepNight: Identifiable, Equatable {
     var date: Date
     var hours: Double
-
-    var id: Date { date }
-}
-
-struct DiaryTimeEntry: Identifiable, Equatable {
-    var slot: TimeOfDaySlot
-    var meanValence: Double?
-    var mood: DiaryMoodBucket?
-
-    var id: TimeOfDaySlot { slot }
-}
-
-struct DiaryDay: Identifiable, Equatable {
-    var date: Date
-    var entries: [DiaryTimeEntry]
-    var sleepHours: Double?
-    var activity: ActivityBucket?
-    var autoNotes: String
 
     var id: Date { date }
 }

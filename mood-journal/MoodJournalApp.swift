@@ -1,4 +1,3 @@
-import SwiftData
 import SwiftUI
 
 @main
@@ -7,6 +6,5 @@ struct MoodJournalApp: App {
         WindowGroup {
             RootView()
         }
-        .modelContainer(for: DiaryNote.self)
     }
 }
