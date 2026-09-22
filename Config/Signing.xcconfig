@@ -1,0 +1,11 @@
+// Signing identifiers are deliberately not in the repository.
+//
+// To build: copy Signing.local.example.xcconfig to Signing.local.xcconfig and put your own
+// Apple Development team and bundle identifier in it. That file is gitignored.
+//
+// Left as-is, the project still builds for the Simulator; a device build needs a real team.
+
+MOOD_DEVELOPMENT_TEAM =
+MOOD_BUNDLE_ID = com.example.moodjournal
+
+#include? "Signing.local.xcconfig"

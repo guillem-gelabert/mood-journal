@@ -17,6 +17,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		100000000000000000000010 /* Signing.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Signing.xcconfig; path = Config/Signing.xcconfig; sourceTree = "<group>"; };
 		10000000000000000000000E /* mood-journal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mood-journal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		10000000000000000000000F /* mood-journalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mood-journalTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -69,6 +70,7 @@
 		100000000000000000000601 = {
 			isa = PBXGroup;
 			children = (
+				100000000000000000000010 /* Signing.xcconfig */,
 				100000000000000000000B01 /* mood-journal */,
 				100000000000000000000B02 /* mood-journalTests */,
 				100000000000000000000608 /* Products */,
@@ -215,6 +217,7 @@
 /* Begin XCBuildConfiguration section */
 		100000000000000000000A01 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 100000000000000000000010 /* Signing.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -277,6 +280,7 @@
 		};
 		100000000000000000000A02 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 100000000000000000000010 /* Signing.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -338,7 +342,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = "$(MOOD_DEVELOPMENT_TEAM)";
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = "mood-journal/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
@@ -347,7 +351,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.moodjournal;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(MOOD_BUNDLE_ID)";
 				PRODUCT_MODULE_NAME = mood_journal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -366,7 +370,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = "$(MOOD_DEVELOPMENT_TEAM)";
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = "mood-journal/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
@@ -375,7 +379,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.moodjournal;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(MOOD_BUNDLE_ID)";
 				PRODUCT_MODULE_NAME = mood_journal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -400,7 +404,7 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.moodjournal.tests";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(MOOD_BUNDLE_ID).tests";
 				PRODUCT_MODULE_NAME = mood_journalTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -425,7 +429,7 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.moodjournal.tests";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(MOOD_BUNDLE_ID).tests";
 				PRODUCT_MODULE_NAME = mood_journalTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

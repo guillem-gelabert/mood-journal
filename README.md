@@ -37,9 +37,19 @@ marks those records as estimates, which the UI states.
 
 ## Setup
 
+Signing identifiers are not in the repository. Before building:
+
+```sh
+cp Config/Signing.local.example.xcconfig Config/Signing.local.xcconfig
+```
+
+and put your own Apple Development team and bundle identifier in it. The file is gitignored;
+`Config/Signing.xcconfig` reads it through an optional include, so the project still opens and
+builds for the Simulator without it.
+
 - Open `mood-journal.xcodeproj` in Xcode.
 - Enable **HealthKit** under **Signing & Capabilities** if it is not already on.
-- Set a signing team. A free personal team works; provisioning expires after 7 days.
+- A free personal team is enough, including for HealthKit. Provisioning expires after 7 days.
 - Real testing needs a physical device. The Simulator has no useful State of Mind or sleep data.
 
 ### Time Sensitive notifications

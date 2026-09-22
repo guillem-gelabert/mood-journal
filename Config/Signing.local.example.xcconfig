@@ -1,0 +1,3 @@
+// Copy to Signing.local.xcconfig and fill in your own values.
+MOOD_DEVELOPMENT_TEAM = ABCDE12345
+MOOD_BUNDLE_ID = com.yourname.moodjournal
