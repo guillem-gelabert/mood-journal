@@ -10,6 +10,9 @@ struct ValenceSlider: View {
 
     private static let trackHeight: CGFloat = 28
     private static let thumbDiameter: CGFloat = 54
+    /// Slop reaching the mood name above and the tick marks below.
+    private static let hitSlopTop: CGFloat = 30
+    private static let hitSlopBottom: CGFloat = 46
 
     private var classification: MoodChartClassification {
         MoodAnalytics.chartClassification(for: valence)
@@ -39,14 +42,22 @@ struct ValenceSlider: View {
                         .offset(x: thumbX - Self.thumbDiameter / 2)
                 }
                 .frame(height: Self.thumbDiameter)
-                .contentShape(Rectangle())
-                .gesture(
-                    DragGesture(minimumDistance: 0)
-                        .onChanged { value in
-                            let x = value.location.x - Self.thumbDiameter / 2
-                            valence = min(max((x / usable) * 2 - 1, -1), 1)
-                        }
-                )
+                // The touch target reaches up to the mood name and down past the ticks.
+                // An overlay with negative padding grows beyond the slider's bounds without
+                // displacing anything around it.
+                .overlay {
+                    Color.clear
+                        .padding(.top, -Self.hitSlopTop)
+                        .padding(.bottom, -Self.hitSlopBottom)
+                        .contentShape(Rectangle())
+                        .gesture(
+                            DragGesture(minimumDistance: 0)
+                                .onChanged { value in
+                                    let x = value.location.x - Self.thumbDiameter / 2
+                                    valence = min(max((x / usable) * 2 - 1, -1), 1)
+                                }
+                        )
+                }
             }
             .frame(height: Self.thumbDiameter)
             .accessibilityElement()
