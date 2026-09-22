@@ -30,6 +30,10 @@ final class StubHealthService: HealthDataReading {
         return snapshot
     }
 
+    func earliestPermittedSampleDate() -> Date {
+        Date(timeIntervalSince1970: 0)
+    }
+
     func releaseSnapshotCall() {
         continuation?.resume()
         continuation = nil
@@ -41,10 +45,15 @@ final class MoodDataStoreTests: XCTestCase {
     func testConcurrentRefreshesRunTheServiceOnce() async {
         let stub = StubHealthService()
         stub.holdsSnapshotCall = true
-        let store = MoodDataStore(service: stub, calendar: Self.utcCalendar)
+        let store = MoodDataStore(service: stub, calendar: Self.utcCalendar, defaults: Self.freshDefaults(), now: { Self.date("2026-03-15 12:00") })
 
         let inFlight = Task { await store.refresh() }
-        while stub.snapshotCallCount == 0 { await Task.yield() }
+        var spins = 0
+        while stub.snapshotCallCount == 0 && spins < 10_000 {
+            await Task.yield()
+            spins += 1
+        }
+        XCTAssertEqual(stub.snapshotCallCount, 1, "the first refresh never reached the service")
 
         // A cold launch fires .task and scenePhase == .active together; the second must bail.
         await store.refresh()
@@ -62,7 +71,7 @@ final class MoodDataStoreTests: XCTestCase {
             dailyEnergy: [],
             sleepNights: []
         )
-        let store = MoodDataStore(service: stub, calendar: Self.utcCalendar)
+        let store = MoodDataStore(service: stub, calendar: Self.utcCalendar, defaults: Self.freshDefaults(), now: { Self.date("2026-03-15 12:00") })
 
         await store.refresh()
         XCTAssertEqual(store.chartData.checkIns.count, 1)
@@ -76,7 +85,7 @@ final class MoodDataStoreTests: XCTestCase {
 
     func testForegroundRefreshDoesNothingBeforeTheFirstLoad() async {
         let stub = StubHealthService()
-        let store = MoodDataStore(service: stub, calendar: Self.utcCalendar)
+        let store = MoodDataStore(service: stub, calendar: Self.utcCalendar, defaults: Self.freshDefaults(), now: { Self.date("2026-03-15 12:00") })
 
         await store.refreshOnForeground()
         XCTAssertEqual(stub.snapshotCallCount, 0)
@@ -91,6 +100,11 @@ final class MoodDataStoreTests: XCTestCase {
         calendar.timeZone = TimeZone(secondsFromGMT: 0)!
         return calendar
     }()
+
+    private static func freshDefaults() -> UserDefaults {
+        let suite = UserDefaults(suiteName: "moodstore.tests.\(UUID().uuidString)")!
+        return suite
+    }
 
     private static func date(_ value: String) -> Date {
         let formatter = DateFormatter()

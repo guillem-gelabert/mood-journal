@@ -3,34 +3,43 @@ import Foundation
 enum MoodAnalytics {
     static let rollingWindowRadiusInDays = 3
 
-    static func derive(snapshot: HealthSnapshot, calendar: Calendar = .current) -> ChartData {
-        let dates = snapshot.moodCheckIns.map(\.date)
-            + snapshot.dailyEnergy.map(\.date)
-            + snapshot.sleepNights.map(\.date)
-        let windowStart = dates.min().map { calendar.startOfDay(for: $0) }
-        let windowEnd = dates.max().map { calendar.startOfDay(for: $0) }
+    /// Derives every chart series for `interval`.
+    ///
+    /// `snapshot` is expected to cover a wider window than `interval` (see
+    /// `ChartRange.fetchInterval`): the centred rolling functions need data either side of the
+    /// range start, so the series are computed over everything loaded and only then clipped.
+    static func derive(
+        snapshot: HealthSnapshot,
+        interval: DateInterval?,
+        calendar: Calendar = .current
+    ) -> ChartData {
+        guard let interval else { return .empty }
+
+        func inRange(_ date: Date) -> Bool { date >= interval.start && date < interval.end }
+
+        let checkIns = snapshot.moodCheckIns.filter { inRange($0.date) }
+        let rangeDays = calendar.dateComponents([.day], from: interval.start, to: interval.end).day ?? 0
 
         return ChartData(
-            checkIns: snapshot.moodCheckIns,
-            dailyEnergy: snapshot.dailyEnergy,
-            sleepNights: snapshot.sleepNights,
-            rollingMood: centeredRollingDailyMean(checkIns: snapshot.moodCheckIns, calendar: calendar),
-            moodBands: centeredRawStandardDeviationBand(checkIns: snapshot.moodCheckIns, calendar: calendar),
-            rollingEnergy: rollingEnergyAverage(values: snapshot.dailyEnergy, calendar: calendar),
-            weekdaySamples: weekdaySamples(checkIns: snapshot.moodCheckIns, calendar: calendar),
+            checkIns: checkIns,
+            dailyEnergy: snapshot.dailyEnergy.filter { inRange($0.date) },
+            sleepNights: snapshot.sleepNights.filter { inRange($0.date) },
+            rollingMood: centeredRollingDailyMean(checkIns: snapshot.moodCheckIns, calendar: calendar)
+                .filter { inRange($0.date) },
+            moodBands: centeredRawStandardDeviationBand(checkIns: snapshot.moodCheckIns, calendar: calendar)
+                .filter { inRange($0.date) },
+            rollingEnergy: rollingEnergyAverage(values: snapshot.dailyEnergy, calendar: calendar)
+                .filter { inRange($0.date) },
+            weekdaySamples: weekdaySamples(checkIns: checkIns, calendar: calendar),
             weekdayStats: weekdayStats(
-                checkIns: snapshot.moodCheckIns,
-                endDate: windowEnd ?? Date(),
+                checkIns: checkIns,
+                endDate: interval.end,
+                recentWindowDays: max(14, rangeDays / 4),
                 calendar: calendar
             ),
-            monthStarts: windowStart.flatMap { start in
-                windowEnd.map { monthStarts(from: start, through: $0, calendar: calendar) }
-            } ?? [],
-            fifteenthDates: windowStart.flatMap { start in
-                windowEnd.map { fifteenthOfMonths(from: start, through: $0, calendar: calendar) }
-            } ?? [],
-            windowStart: windowStart,
-            windowEnd: windowEnd
+            monthStarts: monthStarts(from: interval.start, through: interval.end, calendar: calendar),
+            fifteenthDates: fifteenthOfMonths(from: interval.start, through: interval.end, calendar: calendar),
+            interval: interval
         )
     }
 
@@ -105,9 +114,9 @@ enum MoodAnalytics {
     }
 
     static func weekdaySamples(checkIns: [MoodCheckIn], calendar: Calendar = .current) -> [WeekdayMoodSample] {
-        checkIns.enumerated().map { index, sample in
+        checkIns.map { sample in
             let weekday = mondayFirstWeekdayIndex(for: sample.date, calendar: calendar)
-            let jitter = deterministicJitter(index: index)
+            let jitter = deterministicJitter(for: sample.id)
             return WeekdayMoodSample(
                 id: sample.id,
                 weekdayIndex: weekday,
@@ -120,10 +129,11 @@ enum MoodAnalytics {
     static func weekdayStats(
         checkIns: [MoodCheckIn],
         endDate: Date = Date(),
+        recentWindowDays: Int = 14,
         calendar: Calendar = .current
     ) -> [WeekdayMoodStat] {
         let grouped = Dictionary(grouping: checkIns) { mondayFirstWeekdayIndex(for: $0.date, calendar: calendar) }
-        let recentStart = calendar.date(byAdding: .day, value: -14, to: endDate) ?? endDate
+        let recentStart = calendar.date(byAdding: .day, value: -recentWindowDays, to: endDate) ?? endDate
 
         return (1...7).compactMap { weekday in
             guard let samples = grouped[weekday], !samples.isEmpty else { return nil }
@@ -170,8 +180,11 @@ enum MoodAnalytics {
         }
     }
 
-    private static func deterministicJitter(index: Int) -> Double {
+    /// Keyed off the sample's identity, not its index: keying off array position made every
+    /// point in the weekday scatter jump whenever the range changed the array's contents.
+    /// Uses a UUID byte rather than hashValue, which is seeded per process and so unstable.
+    private static func deterministicJitter(for id: UUID) -> Double {
         let sequence = [-0.26, 0.18, -0.08, 0.28, 0.04, -0.20, 0.12]
-        return sequence[index % sequence.count]
+        return sequence[Int(id.uuid.0) % sequence.count]
     }
 }

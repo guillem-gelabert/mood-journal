@@ -4,6 +4,9 @@ import HealthKit
 protocol HealthDataReading {
     func requestAuthorization() async throws
     func loadSnapshot(from startDate: Date, to endDate: Date, calendar: Calendar) async throws -> HealthSnapshot
+    /// Floor for the `.all` range. Without it `.all` would either lie about its span or make
+    /// the statistics collection query enumerate an absurd number of daily buckets.
+    func earliestPermittedSampleDate() -> Date
 }
 
 protocol MoodLogging {

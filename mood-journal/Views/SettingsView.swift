@@ -9,7 +9,7 @@ struct SettingsView: View {
         Form {
             Section {
                 NavigationLink {
-                    ChartsDashboardView(data: store.chartData)
+                    ChartsDashboardView(store: store)
                         .task { await store.refresh() }
                 } label: {
                     Label("Charts", systemImage: "chart.xyaxis.line")

@@ -42,6 +42,10 @@ final class HealthKitService {
         try await healthStore.requestAuthorization(toShare: shareTypes, read: readTypes)
     }
 
+    func earliestPermittedSampleDate() -> Date {
+        healthStore.earliestPermittedSampleDate()
+    }
+
     func loadSnapshot(from startDate: Date, to endDate: Date, calendar: Calendar = .current) async throws -> HealthSnapshot {
         async let mood = queryStateOfMind(from: startDate, to: endDate)
         async let energy = queryDailyEnergy(from: startDate, to: endDate, calendar: calendar)
