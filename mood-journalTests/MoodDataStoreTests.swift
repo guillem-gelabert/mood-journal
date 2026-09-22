@@ -34,6 +34,10 @@ final class StubHealthService: HealthDataReading {
         Date(timeIntervalSince1970: 0)
     }
 
+    func loadMoodCheckIns(from startDate: Date, to endDate: Date) async throws -> [MoodCheckIn] {
+        snapshot.moodCheckIns.filter { $0.date >= startDate && $0.date <= endDate }
+    }
+
     func releaseSnapshotCall() {
         continuation?.resume()
         continuation = nil

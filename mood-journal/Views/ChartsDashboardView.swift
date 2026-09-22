@@ -18,6 +18,10 @@ struct ChartsDashboardView: View {
                         .foregroundStyle(Color.journalInk.opacity(0.7))
                 }
 
+                if store.adherence.hasAnything {
+                    AdherenceSummaryView(stats: store.adherence)
+                }
+
                 let data = store.chartData
 
                 MoodOverTimeChart(

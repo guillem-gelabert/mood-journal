@@ -7,6 +7,10 @@ protocol HealthDataReading {
     /// Floor for the `.all` range. Without it `.all` would either lie about its span or make
     /// the statistics collection query enumerate an absurd number of daily buckets.
     func earliestPermittedSampleDate() -> Date
+    /// Mood samples alone, over a window independent of the chart range. The adherence
+    /// ledger looks further back than the picked range, and a silently truncated number
+    /// erodes trust in everything else on the screen.
+    func loadMoodCheckIns(from startDate: Date, to endDate: Date) async throws -> [MoodCheckIn]
 }
 
 protocol MoodLogging {

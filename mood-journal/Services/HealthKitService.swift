@@ -42,6 +42,10 @@ final class HealthKitService {
         try await healthStore.requestAuthorization(toShare: shareTypes, read: readTypes)
     }
 
+    func loadMoodCheckIns(from startDate: Date, to endDate: Date) async throws -> [MoodCheckIn] {
+        try await queryStateOfMind(from: startDate, to: endDate)
+    }
+
     func earliestPermittedSampleDate() -> Date {
         healthStore.earliestPermittedSampleDate()
     }
