@@ -3,23 +3,23 @@ import UIKit
 
 struct RootView: View {
     @Environment(\.scenePhase) private var scenePhase
-    @StateObject private var viewModel = MoodJournalViewModel()
+    @State private var store = MoodDataStore()
 
     var body: some View {
         ZStack {
             Color.journalBackground.ignoresSafeArea()
 
-            if let error = viewModel.errorMessage {
+            if let error = store.errorMessage {
                 HealthKitErrorView(message: error) {
                     openSettings()
                 } retry: {
-                    Task { await viewModel.refresh() }
+                    Task { await store.refresh() }
                 }
             } else {
-                ChartsDashboardView(viewModel: viewModel)
+                ChartsDashboardView(data: store.chartData)
             }
 
-            if viewModel.isLoading {
+            if store.isLoading {
                 ProgressView()
                     .padding(18)
                     .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 8))
@@ -27,11 +27,11 @@ struct RootView: View {
         }
         .font(.system(.body, design: .monospaced))
         .task {
-            await viewModel.refresh()
+            await store.refresh()
         }
         .onChange(of: scenePhase) { _, newPhase in
             if newPhase == .active {
-                Task { await viewModel.refresh() }
+                Task { await store.refreshOnForeground() }
             }
         }
     }

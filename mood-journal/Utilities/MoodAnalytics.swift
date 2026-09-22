@@ -3,6 +3,37 @@ import Foundation
 enum MoodAnalytics {
     static let rollingWindowRadiusInDays = 3
 
+    static func derive(snapshot: HealthSnapshot, calendar: Calendar = .current) -> ChartData {
+        let dates = snapshot.moodCheckIns.map(\.date)
+            + snapshot.dailyEnergy.map(\.date)
+            + snapshot.sleepNights.map(\.date)
+        let windowStart = dates.min().map { calendar.startOfDay(for: $0) }
+        let windowEnd = dates.max().map { calendar.startOfDay(for: $0) }
+
+        return ChartData(
+            checkIns: snapshot.moodCheckIns,
+            dailyEnergy: snapshot.dailyEnergy,
+            sleepNights: snapshot.sleepNights,
+            rollingMood: centeredRollingDailyMean(checkIns: snapshot.moodCheckIns, calendar: calendar),
+            moodBands: centeredRawStandardDeviationBand(checkIns: snapshot.moodCheckIns, calendar: calendar),
+            rollingEnergy: rollingEnergyAverage(values: snapshot.dailyEnergy, calendar: calendar),
+            weekdaySamples: weekdaySamples(checkIns: snapshot.moodCheckIns, calendar: calendar),
+            weekdayStats: weekdayStats(
+                checkIns: snapshot.moodCheckIns,
+                endDate: windowEnd ?? Date(),
+                calendar: calendar
+            ),
+            monthStarts: windowStart.flatMap { start in
+                windowEnd.map { monthStarts(from: start, through: $0, calendar: calendar) }
+            } ?? [],
+            fifteenthDates: windowStart.flatMap { start in
+                windowEnd.map { fifteenthOfMonths(from: start, through: $0, calendar: calendar) }
+            } ?? [],
+            windowStart: windowStart,
+            windowEnd: windowEnd
+        )
+    }
+
     static func chartClassification(for valence: Double) -> MoodChartClassification {
         if valence > 0.6 { return .veryPleasant }
         if valence >= 0.3 { return .pleasant }

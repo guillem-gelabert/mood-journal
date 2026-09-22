@@ -25,7 +25,7 @@ struct HealthSnapshot {
 }
 
 final class HealthKitService {
-    private let healthStore = HKHealthStore()
+    let healthStore = HKHealthStore()
 
     func requestAuthorization() async throws {
         guard HKHealthStore.isHealthDataAvailable() else {
@@ -38,7 +38,8 @@ final class HealthKitService {
             try categoryType(.sleepAnalysis)
         ]
 
-        try await healthStore.requestAuthorization(toShare: Set<HKSampleType>(), read: readTypes)
+        let shareTypes: Set<HKSampleType> = [HKObjectType.stateOfMindType()]
+        try await healthStore.requestAuthorization(toShare: shareTypes, read: readTypes)
     }
 
     func loadSnapshot(from startDate: Date, to endDate: Date, calendar: Calendar = .current) async throws -> HealthSnapshot {

@@ -2,31 +2,31 @@ import Charts
 import SwiftUI
 
 struct ChartsDashboardView: View {
-    @ObservedObject var viewModel: MoodJournalViewModel
+    var data: ChartData
 
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 24) {
                     MoodOverTimeChart(
-                        checkIns: viewModel.checkIns,
-                        rolling: viewModel.rollingMood,
-                        bands: viewModel.moodBands,
-                        monthStarts: viewModel.monthStarts,
-                        fifteenthDates: viewModel.fifteenthDates,
-                        subtitle: "\(viewModel.dateRangeSubtitle) - \(viewModel.checkIns.count) check-ins"
+                        checkIns: data.checkIns,
+                        rolling: data.rollingMood,
+                        bands: data.moodBands,
+                        monthStarts: data.monthStarts,
+                        fifteenthDates: data.fifteenthDates,
+                        subtitle: "\(data.dateRangeSubtitle) - \(data.checkIns.count) check-ins"
                     )
 
                     MoodByWeekdayChart(
-                        samples: viewModel.weekdaySamples,
-                        stats: viewModel.weekdayStats,
-                        subtitle: "\(viewModel.dateRangeSubtitle) - Monday first"
+                        samples: data.weekdaySamples,
+                        stats: data.weekdayStats,
+                        subtitle: "\(data.dateRangeSubtitle) - Monday first"
                     )
 
                     ActiveEnergyChart(
-                        energy: viewModel.dailyEnergy,
-                        rolling: viewModel.rollingEnergy,
-                        subtitle: "\(viewModel.dateRangeSubtitle) - \(viewModel.dailyEnergy.count) days"
+                        energy: data.dailyEnergy,
+                        rolling: data.rollingEnergy,
+                        subtitle: "\(data.dateRangeSubtitle) - \(data.dailyEnergy.count) days"
                     )
                 }
                 .padding()
