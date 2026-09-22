@@ -8,8 +8,8 @@ import SwiftUI
 struct ValenceSlider: View {
     @Binding var valence: Double
 
-    private static let trackHeight: CGFloat = 16
-    private static let thumbDiameter: CGFloat = 40
+    private static let trackHeight: CGFloat = 28
+    private static let thumbDiameter: CGFloat = 54
 
     private var classification: MoodChartClassification {
         MoodAnalytics.chartClassification(for: valence)
@@ -33,8 +33,8 @@ struct ValenceSlider: View {
 
                     Circle()
                         .fill(Color.journalBackground)
-                        .overlay(Circle().strokeBorder(classification.color, lineWidth: 4))
-                        .shadow(color: Color.journalInk.opacity(0.18), radius: 3, y: 1)
+                        .overlay(Circle().strokeBorder(classification.color, lineWidth: 6))
+                        .shadow(color: Color.journalInk.opacity(0.2), radius: 4, y: 2)
                         .frame(width: Self.thumbDiameter, height: Self.thumbDiameter)
                         .offset(x: thumbX - Self.thumbDiameter / 2)
                 }
@@ -65,7 +65,7 @@ struct ValenceSlider: View {
                 ForEach(Self.tickValues, id: \.self) { tick in
                     Rectangle()
                         .fill(Color.journalInk.opacity(tick == 0 ? 0.32 : 0.16))
-                        .frame(width: 1.5, height: tick == 0 ? 13 : 7)
+                        .frame(width: 2, height: tick == 0 ? 15 : 8)
                     if tick != Self.tickValues.last { Spacer(minLength: 0) }
                 }
             }

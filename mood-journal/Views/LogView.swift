@@ -35,7 +35,9 @@ struct LogControls: View {
     @Bindable var model: LogEntryModel
 
     var body: some View {
-        VStack(spacing: 36) {
+        // Weighted to the bottom of the screen: the slider is the one control you drag with
+        // a thumb, so it sits inside easy reach rather than mid-screen.
+        VStack(spacing: 28) {
             Spacer()
 
             Text(model.classification.rawValue)
@@ -55,11 +57,10 @@ struct LogControls: View {
                     .multilineTextAlignment(.center)
                     .onTapGesture { model.dismissFailure() }
             }
-
-            Spacer()
-            Spacer()
         }
-        .padding(28)
+        .padding(.horizontal, 28)
+        .padding(.top, 28)
+        .padding(.bottom, 16)
     }
 
     private var logButton: some View {
