@@ -6,7 +6,18 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		100000000000000000000120 /* mood-journal Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 100000000000000000000011 /* mood-journal Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
+		100000000000000000000204 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 100000000000000000000301 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 100000000000000000000403;
+			remoteInfo = "mood-journal Watch App";
+		};
 		100000000000000000000201 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 100000000000000000000301 /* Project object */;
@@ -17,12 +28,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		100000000000000000000011 /* mood-journal Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mood-journal Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		100000000000000000000010 /* Signing.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Signing.xcconfig; path = Config/Signing.xcconfig; sourceTree = "<group>"; };
 		10000000000000000000000E /* mood-journal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mood-journal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		10000000000000000000000F /* mood-journalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mood-journalTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		100000000000000000000503 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		100000000000000000000501 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -40,6 +59,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		100000000000000000000B04 /* mood-journal Watch App */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				100000000000000000000C02 /* Exceptions for "mood-journal Watch App" */,
+			);
+			path = "mood-journal Watch App";
+			sourceTree = "<group>";
+		};
 		100000000000000000000B03 /* Shared */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = Shared;
@@ -61,6 +88,14 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		100000000000000000000C02 /* Exceptions for "mood-journal Watch App" */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+				"mood-journal Watch App.entitlements",
+			);
+			target = 100000000000000000000403 /* mood-journal Watch App */;
+		};
 		100000000000000000000C01 /* Exceptions for "mood-journal" folder in "mood-journal" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -78,6 +113,7 @@
 				100000000000000000000010 /* Signing.xcconfig */,
 				100000000000000000000B03 /* Shared */,
 				100000000000000000000B01 /* mood-journal */,
+				100000000000000000000B04 /* mood-journal Watch App */,
 				100000000000000000000B02 /* mood-journalTests */,
 				100000000000000000000608 /* Products */,
 			);
@@ -88,6 +124,7 @@
 			children = (
 				10000000000000000000000E /* mood-journal.app */,
 				10000000000000000000000F /* mood-journalTests.xctest */,
+				100000000000000000000011 /* mood-journal Watch App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -95,6 +132,27 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		100000000000000000000403 /* mood-journal Watch App */ = {
+			isa = PBXNativeTarget;
+			fileSystemSynchronizedGroups = (
+				100000000000000000000B04 /* mood-journal Watch App */,
+				100000000000000000000B03 /* Shared */,
+			);
+			buildConfigurationList = 100000000000000000000704 /* Build configuration list for PBXNativeTarget "mood-journal Watch App" */;
+			buildPhases = (
+				100000000000000000000803 /* Sources */,
+				100000000000000000000503 /* Frameworks */,
+				100000000000000000000903 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "mood-journal Watch App";
+			productName = "mood-journal Watch App";
+			productReference = 100000000000000000000011 /* mood-journal Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
 		100000000000000000000401 /* mood-journal */ = {
 			isa = PBXNativeTarget;
 			fileSystemSynchronizedGroups = (
@@ -106,10 +164,12 @@
 				100000000000000000000801 /* Sources */,
 				100000000000000000000501 /* Frameworks */,
 				100000000000000000000901 /* Resources */,
+				100000000000000000001001 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				100000000000000000000203 /* PBXTargetDependency */,
 			);
 			name = "mood-journal";
 			productName = "mood-journal";
@@ -175,11 +235,33 @@
 			targets = (
 				100000000000000000000401 /* mood-journal */,
 				100000000000000000000402 /* mood-journalTests */,
+				100000000000000000000403 /* mood-journal Watch App */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		100000000000000000001001 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				100000000000000000000120 /* mood-journal Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXResourcesBuildPhase section */
+		100000000000000000000903 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		100000000000000000000901 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -197,6 +279,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		100000000000000000000803 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		100000000000000000000801 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -214,6 +303,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		100000000000000000000203 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 100000000000000000000403 /* mood-journal Watch App */;
+			targetProxy = 100000000000000000000204 /* PBXContainerItemProxy */;
+		};
 		100000000000000000000202 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 100000000000000000000401 /* mood-journal */;
@@ -222,6 +316,62 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		100000000000000000000A07 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "mood-journal Watch App/mood-journal Watch App.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "$(MOOD_DEVELOPMENT_TEAM)";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "mood-journal Watch App/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(MOOD_BUNDLE_ID).watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "watchos watchsimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 11.0;
+			};
+			name = Debug;
+		};
+		100000000000000000000A08 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "mood-journal Watch App/mood-journal Watch App.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "$(MOOD_DEVELOPMENT_TEAM)";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "mood-journal Watch App/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(MOOD_BUNDLE_ID).watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "watchos watchsimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 11.0;
+			};
+			name = Release;
+		};
 		100000000000000000000A01 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 100000000000000000000010 /* Signing.xcconfig */;
@@ -450,6 +600,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		100000000000000000000704 /* Build configuration list for PBXNativeTarget "mood-journal Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				100000000000000000000A07 /* Debug */,
+				100000000000000000000A08 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		100000000000000000000701 /* Build configuration list for PBXNativeTarget "mood-journal" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

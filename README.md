@@ -13,6 +13,8 @@ momentary-emotion sample lands in Apple Health. Charts and settings live behind 
   active energy, and sleep, over a range you pick (30D / 90D / 1Y / All).
 - **Momentum and Resilience** — two adherence numbers over your reminder prompts.
 - **Export** — the chart report as a two-page A4 PDF via the share sheet.
+- **Apple Watch** — a companion app that logs and nothing else: Digital Crown for valence, one
+  button to save, writing straight to Health on the watch.
 
 ## Adherence metrics
 
@@ -66,7 +68,8 @@ Read: State of Mind (momentary emotions), Active Energy Burned (kJ), Sleep Analy
 states, attributed to the wake-up day, with overlapping samples from multiple sources counted
 once).
 
-Write: State of Mind momentary emotions.
+Write: State of Mind momentary emotions, from either the phone or the watch. The watch has its
+own HealthKit store and asks only for write access; Health syncs the samples to the phone.
 
 ## Appearance
 
@@ -76,16 +79,30 @@ screen and the exported PDF match. There is no dark theme.
 ## Project layout
 
 ```
-Models/      Value types: chart series, ranges, reminders, prompt records
-Services/    HealthKit, notifications, persistence, PDF rendering (all protocol-backed)
-Stores/      @Observable @MainActor state: mood data, log entry, reminders
-Utilities/   Pure functions: analytics, adherence, interval merging
-Views/       Screens, with Views/Charts/ holding the reusable chart views
-Tools/       GenerateAppIcon.swift — run by hand, not a build phase
+Shared/                  Code both apps use: classification, palette, HealthKit writer,
+                         log-entry state machine
+mood-journal/
+  Models/                Value types: chart series, ranges, reminders, prompt records
+  Services/              HealthKit reads, notifications, persistence, PDF rendering
+  Stores/                @Observable @MainActor state: mood data, reminders
+  Utilities/             Pure functions: analytics, adherence, interval merging
+  Views/                 Screens, with Views/Charts/ holding the reusable chart views
+mood-journal Watch App/  The watch app: one screen, Crown-driven
+Tools/                   GenerateAppIcon.swift — run by hand, not a build phase
 ```
 
 Sources are picked up through file-system-synchronized groups, so adding a file needs no
-project edits.
+project edits. `Shared/` is a member of both app targets, which is why the classification
+cutoffs exist once rather than twice.
+
+The watch app is embedded in the iOS app, so it installs alongside it. That means **building
+the iOS scheme requires a watchOS simulator runtime**, even for the tests:
+
+```sh
+xcodebuild -downloadPlatform watchOS
+```
+
+Without it the build fails with "watchOS N must be installed in order to run the scheme".
 
 ## Tests
 
