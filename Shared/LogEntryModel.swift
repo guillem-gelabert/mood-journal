@@ -1,4 +1,5 @@
 import Foundation
+import HealthKit
 
 @MainActor
 @Observable
@@ -19,7 +20,7 @@ final class LogEntryModel {
     private var hasRequestedAuthorization = false
 
     init(
-        service: any MoodLogging = HealthKitService(),
+        service: any MoodLogging = HealthKitMoodLogger(store: HKHealthStore()),
         now: @escaping () -> Date = Date.init,
         confirmationDelay: Duration = .seconds(1.5)
     ) {
@@ -29,7 +30,7 @@ final class LogEntryModel {
     }
 
     var classification: MoodChartClassification {
-        MoodAnalytics.chartClassification(for: valence)
+        MoodChartClassification.classification(for: valence)
     }
 
     /// Charts are buried in settings now, so the log screen is the only reliable place to

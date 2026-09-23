@@ -66,13 +66,7 @@ enum MoodAnalytics {
     }
 
     static func chartClassification(for valence: Double) -> MoodChartClassification {
-        if valence > 0.6 { return .veryPleasant }
-        if valence >= 0.3 { return .pleasant }
-        if valence >= 0.1 { return .slightlyPleasant }
-        if valence >= -0.1 { return .neutral }
-        if valence >= -0.3 { return .slightlyUnpleasant }
-        if valence >= -0.6 { return .unpleasant }
-        return .veryUnpleasant
+        MoodChartClassification.classification(for: valence)
     }
 
     static func dailyMeans(for checkIns: [MoodCheckIn], calendar: Calendar = .current) -> [Date: Double] {

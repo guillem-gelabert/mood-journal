@@ -27,19 +27,19 @@ struct HealthSnapshot {
 final class HealthKitService {
     let healthStore = HKHealthStore()
 
+    /// One prompt covering both directions: the shared logger asks to write State of Mind and
+    /// to read whatever the charts additionally need.
     func requestAuthorization() async throws {
-        guard HKHealthStore.isHealthDataAvailable() else {
-            throw HealthKitServiceError.healthDataUnavailable
-        }
-
         let readTypes: Set<HKObjectType> = [
-            HKObjectType.stateOfMindType(),
             try quantityType(.activeEnergyBurned),
             try categoryType(.sleepAnalysis)
         ]
+        try await HealthKitMoodLogger(store: healthStore, additionalReadTypes: readTypes)
+            .requestAuthorization()
+    }
 
-        let shareTypes: Set<HKSampleType> = [HKObjectType.stateOfMindType()]
-        try await healthStore.requestAuthorization(toShare: shareTypes, read: readTypes)
+    var moodLogger: HealthKitMoodLogger {
+        HealthKitMoodLogger(store: healthStore)
     }
 
     func loadMoodCheckIns(from startDate: Date, to endDate: Date) async throws -> [MoodCheckIn] {

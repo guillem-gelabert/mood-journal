@@ -40,6 +40,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		100000000000000000000B03 /* Shared */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Shared;
+			sourceTree = "<group>";
+		};
 		100000000000000000000B01 /* mood-journal */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -71,6 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				100000000000000000000010 /* Signing.xcconfig */,
+				100000000000000000000B03 /* Shared */,
 				100000000000000000000B01 /* mood-journal */,
 				100000000000000000000B02 /* mood-journalTests */,
 				100000000000000000000608 /* Products */,
@@ -93,6 +99,7 @@
 			isa = PBXNativeTarget;
 			fileSystemSynchronizedGroups = (
 				100000000000000000000B01 /* mood-journal */,
+				100000000000000000000B03 /* Shared */,
 			);
 			buildConfigurationList = 100000000000000000000701 /* Build configuration list for PBXNativeTarget "mood-journal" */;
 			buildPhases = (
