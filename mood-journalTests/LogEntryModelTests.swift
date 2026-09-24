@@ -27,7 +27,7 @@ final class LogEntryModelTests: XCTestCase {
     func testSaveWritesTheSliderValueThenResets() async {
         let logger = StubMoodLogger()
         let stamp = Date(timeIntervalSince1970: 1_800_000_000)
-        let model = LogEntryModel(service: logger, now: { stamp }, confirmationDelay: .zero)
+        let model = LogEntryModel(service: logger, now: { stamp }, confirmationDelay: .zero, didSave: { _ in })
 
         model.valence = 0.45
         await model.save()
@@ -41,7 +41,7 @@ final class LogEntryModelTests: XCTestCase {
     func testFailedSaveSurfacesTheErrorAndKeepsTheValue() async {
         let logger = StubMoodLogger()
         logger.errorToThrow = HealthKitServiceError.healthDataUnavailable
-        let model = LogEntryModel(service: logger, confirmationDelay: .zero)
+        let model = LogEntryModel(service: logger, confirmationDelay: .zero, didSave: { _ in })
 
         model.valence = -0.8
         await model.save()
@@ -58,7 +58,7 @@ final class LogEntryModelTests: XCTestCase {
 
     func testAuthorizationIsRequestedOnlyOnce() async {
         let logger = StubMoodLogger()
-        let model = LogEntryModel(service: logger, confirmationDelay: .zero)
+        let model = LogEntryModel(service: logger, confirmationDelay: .zero, didSave: { _ in })
 
         await model.prepare()
         await model.prepare()
@@ -67,7 +67,7 @@ final class LogEntryModelTests: XCTestCase {
     }
 
     func testClassificationTracksTheSlider() {
-        let model = LogEntryModel(service: StubMoodLogger())
+        let model = LogEntryModel(service: StubMoodLogger(), didSave: { _ in })
 
         model.valence = 0.7
         XCTAssertEqual(model.classification, .veryPleasant)

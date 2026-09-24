@@ -46,6 +46,11 @@ final class HealthKitService {
         try await queryStateOfMind(from: startDate, to: endDate)
     }
 
+    /// The newest momentary emotion at or before `date`, however long ago.
+    func latestMoodCheckIn(before date: Date) async throws -> MoodCheckIn? {
+        try await queryStateOfMind(from: nil, to: date, newestFirst: true, limit: 1).first
+    }
+
     func earliestPermittedSampleDate() -> Date {
         healthStore.earliestPermittedSampleDate()
     }
@@ -57,16 +62,26 @@ final class HealthKitService {
         return try await HealthSnapshot(moodCheckIns: mood, dailyEnergy: energy, sleepNights: sleep)
     }
 
-    private func queryStateOfMind(from startDate: Date, to endDate: Date) async throws -> [MoodCheckIn] {
+    private func queryStateOfMind(
+        from startDate: Date?,
+        to endDate: Date,
+        newestFirst: Bool = false,
+        limit: Int = HKObjectQueryNoLimit
+    ) async throws -> [MoodCheckIn] {
         let type = HKObjectType.stateOfMindType()
-        let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: [])
-        let sort = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: true)
+        // Filtered by kind in the query, not afterwards, so a limit counts only momentary
+        // emotions and a daily mood cannot take the one slot.
+        let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [
+            HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: []),
+            HKQuery.predicateForStatesOfMind(with: .momentaryEmotion)
+        ])
+        let sort = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: !newestFirst)
 
         return try await withCheckedThrowingContinuation { continuation in
             let query = HKSampleQuery(
                 sampleType: type,
                 predicate: predicate,
-                limit: HKObjectQueryNoLimit,
+                limit: limit,
                 sortDescriptors: [sort]
             ) { _, samples, error in
                 if let error {

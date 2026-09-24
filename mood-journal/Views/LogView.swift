@@ -2,6 +2,7 @@ import SwiftUI
 
 struct LogView: View {
     @Bindable var model: LogEntryModel
+    var today: TodayModel
     var store: MoodDataStore
     var reminders: RemindersModel
 
@@ -9,9 +10,11 @@ struct LogView: View {
         NavigationStack {
             ZStack {
                 Color.journalBackground.ignoresSafeArea()
-                LogControls(model: model)
+                if today.screen != .deciding {
+                    TodaySummary(today: today) { today.startLogging() }
+                }
             }
-            .navigationTitle("How are you?")
+            .navigationTitle("Today")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -25,7 +28,47 @@ struct LogView: View {
         }
         .tint(.journalInk)
         .font(.system(.body, design: .monospaced))
+        .sheet(isPresented: isLogging) {
+            LogSheet(model: model) {
+                Task { await today.didLog(reminders: reminders.reminders) }
+            }
+        }
         .task { await model.prepare() }
+    }
+
+    /// Swiping the sheet away or tapping close backs out without logging.
+    private var isLogging: Binding<Bool> {
+        Binding(
+            get: { today.screen == .log },
+            set: { if !$0 { today.cancelLogging() } }
+        )
+    }
+}
+
+/// "How are you?" as a modal over Today, so Log now can be backed out of.
+private struct LogSheet: View {
+    @Bindable var model: LogEntryModel
+    var onLogged: () -> Void
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        NavigationStack {
+            ZStack {
+                Color.journalBackground.ignoresSafeArea()
+                LogControls(model: model, onLogged: onLogged)
+            }
+            .navigationTitle("How are you?")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button("Close", systemImage: "xmark") { dismiss() }
+                }
+            }
+        }
+        .tint(.journalInk)
+        .font(.system(.body, design: .monospaced))
+        // A half-finished drag should not be lost to an accidental swipe.
+        .interactiveDismissDisabled(model.phase == .saving)
     }
 }
 
@@ -33,6 +76,8 @@ struct LogView: View {
 /// own — NavigationStack is UIKit-backed and rasterises as a placeholder.
 struct LogControls: View {
     @Bindable var model: LogEntryModel
+    /// Runs once the confirmation has shown after a successful save.
+    var onLogged: () -> Void = {}
 
     var body: some View {
         // Weighted to the bottom of the screen: the slider is the one control you drag with
@@ -40,13 +85,7 @@ struct LogControls: View {
         VStack(spacing: 28) {
             Spacer()
 
-            Text(model.classification.rawValue)
-                .font(.system(.title, design: .serif).italic())
-                .foregroundStyle(model.classification.color)
-                .contentTransition(.opacity)
-                .animation(.easeOut(duration: 0.15), value: model.classification)
-
-            ValenceSlider(valence: $model.valence)
+            ValenceSlider(valence: $model.valence, horizontalHitSlop: Self.sideMargin)
 
             logButton
 
@@ -58,14 +97,18 @@ struct LogControls: View {
                     .onTapGesture { model.dismissFailure() }
             }
         }
-        .padding(.horizontal, 28)
+        .padding(.horizontal, Self.sideMargin)
         .padding(.top, 28)
         .padding(.bottom, 16)
     }
 
+    private static let sideMargin: CGFloat = 28
+
     private var logButton: some View {
         Button {
-            Task { await model.save() }
+            Task {
+                if await model.save() { onLogged() }
+            }
         } label: {
             Group {
                 switch model.phase {

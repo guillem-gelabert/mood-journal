@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>Mood Journal</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -20,19 +22,10 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>MoodAppGroup</key>
 	<string>group.$(MOOD_BUNDLE_ID)</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
-	<key>NSHealthShareUsageDescription</key>
-	<string>Mood Journal reads your State of Mind, active energy, and sleep data to chart how your mood moves over time.</string>
-	<key>NSHealthUpdateUsageDescription</key>
-	<string>Mood Journal saves the moods you log as State of Mind samples in Apple Health.</string>
-	<key>UILaunchScreen</key>
-	<dict/>
-	<key>UISupportedInterfaceOrientations</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
+	<key>NSExtension</key>
+	<dict>
+		<key>NSExtensionPointIdentifier</key>
+		<string>com.apple.widgetkit-extension</string>
+	</dict>
 </dict>
 </plist>

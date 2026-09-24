@@ -5,20 +5,55 @@ import SwiftUI
 /// A system slider is UIKit-backed, so its size can only be changed by scaling the whole
 /// control, which overflows its container and distorts the thumb. Drawing it gives exact
 /// control over the track and thumb, and lets the fill carry the classification colour.
+///
+/// The whole block, from the mood name down to the end labels, drags the thumb, and so do
+/// the screen margins either side of it.
 struct ValenceSlider: View {
     @Binding var valence: Double
+    /// How far the touch target reaches past the slider's sides, out to the screen edge.
+    var horizontalHitSlop: CGFloat = 0
+
+    @State private var width: CGFloat = 0
 
     private static let trackHeight: CGFloat = 28
     private static let thumbDiameter: CGFloat = 54
-    /// Slop reaching the mood name above and the tick marks below.
-    private static let hitSlopTop: CGFloat = 30
-    private static let hitSlopBottom: CGFloat = 46
+    private static let coordinateSpace = "ValenceSlider"
 
     private var classification: MoodChartClassification {
-        MoodAnalytics.chartClassification(for: valence)
+        MoodChartClassification.classification(for: valence)
     }
 
+    private var usableWidth: CGFloat { max(1, width - Self.thumbDiameter) }
+
     var body: some View {
+        VStack(spacing: 28) {
+            Text(classification.rawValue)
+                .font(.system(.title, design: .serif).italic())
+                .foregroundStyle(classification.color)
+                .contentTransition(.opacity)
+                .animation(.easeOut(duration: 0.15), value: classification)
+
+            control
+        }
+        .coordinateSpace(.named(Self.coordinateSpace))
+        .onGeometryChange(for: CGFloat.self) { $0.size.width } action: { width = $0 }
+        // An overlay with negative padding grows beyond the slider's bounds without
+        // displacing anything around it.
+        .overlay {
+            Color.clear
+                .padding(.horizontal, -horizontalHitSlop)
+                .contentShape(Rectangle())
+                .gesture(
+                    DragGesture(minimumDistance: 0, coordinateSpace: .named(Self.coordinateSpace))
+                        .onChanged { value in
+                            let x = value.location.x - Self.thumbDiameter / 2
+                            valence = min(max((x / usableWidth) * 2 - 1, -1), 1)
+                        }
+                )
+        }
+    }
+
+    private var control: some View {
         VStack(spacing: 14) {
             GeometryReader { geometry in
                 let usable = max(1, geometry.size.width - Self.thumbDiameter)
@@ -42,22 +77,6 @@ struct ValenceSlider: View {
                         .offset(x: thumbX - Self.thumbDiameter / 2)
                 }
                 .frame(height: Self.thumbDiameter)
-                // The touch target reaches up to the mood name and down past the ticks.
-                // An overlay with negative padding grows beyond the slider's bounds without
-                // displacing anything around it.
-                .overlay {
-                    Color.clear
-                        .padding(.top, -Self.hitSlopTop)
-                        .padding(.bottom, -Self.hitSlopBottom)
-                        .contentShape(Rectangle())
-                        .gesture(
-                            DragGesture(minimumDistance: 0)
-                                .onChanged { value in
-                                    let x = value.location.x - Self.thumbDiameter / 2
-                                    valence = min(max((x / usable) * 2 - 1, -1), 1)
-                                }
-                        )
-                }
             }
             .frame(height: Self.thumbDiameter)
             .accessibilityElement()

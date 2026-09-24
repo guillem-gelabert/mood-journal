@@ -20,6 +20,10 @@ struct Reminder: Identifiable, Codable, Equatable {
 
     var notificationIdentifier: String { Self.identifierPrefix + id.uuidString }
 
+    /// Ties the notification to the content extension that logs from inside it. Must match
+    /// `UNNotificationExtensionCategory` in MoodNotification/Info.plist.
+    static let notificationCategory = "mood-checkin"
+
     /// Hour and minute only, so the trigger matches daily.
     var dateComponents: DateComponents { DateComponents(hour: hour, minute: minute) }
 

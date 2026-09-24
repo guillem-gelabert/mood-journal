@@ -61,6 +61,7 @@ final class RemindersModel {
     private func commit(_ updated: [Reminder]) {
         reminders = updated.sorted { $0.sortKey < $1.sortKey }
         store.save(reminders)
+        AppGroup.reloadWidgets()
         Task { await scheduler.sync(reminders) }
     }
 }

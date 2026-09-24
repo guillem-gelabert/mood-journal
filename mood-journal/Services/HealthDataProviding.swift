@@ -14,3 +14,11 @@ protocol HealthDataReading {
 }
 
 extension HealthKitService: HealthDataReading {}
+
+/// What the today screen reads: a day of moods, and the newest one when that day is empty.
+protocol MoodHistoryReading {
+    func loadMoodCheckIns(from startDate: Date, to endDate: Date) async throws -> [MoodCheckIn]
+    func latestMoodCheckIn(before date: Date) async throws -> MoodCheckIn?
+}
+
+extension HealthKitService: MoodHistoryReading {}

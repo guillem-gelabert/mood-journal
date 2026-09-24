@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		100000000000000000000120 /* mood-journal Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 100000000000000000000011 /* mood-journal Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		100000000000000000000121 /* MoodNotification.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 100000000000000000000012 /* MoodNotification.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		100000000000000000000122 /* MoodWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 100000000000000000000013 /* MoodWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,6 +27,20 @@
 			remoteGlobalIDString = 100000000000000000000401;
 			remoteInfo = "mood-journal";
 		};
+		100000000000000000000205 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 100000000000000000000301 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 100000000000000000000404;
+			remoteInfo = MoodNotification;
+		};
+		100000000000000000000207 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 100000000000000000000301 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 100000000000000000000405;
+			remoteInfo = MoodWidget;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +48,8 @@
 		100000000000000000000010 /* Signing.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Signing.xcconfig; path = Config/Signing.xcconfig; sourceTree = "<group>"; };
 		10000000000000000000000E /* mood-journal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mood-journal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		10000000000000000000000F /* mood-journalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mood-journalTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		100000000000000000000012 /* MoodNotification.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MoodNotification.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		100000000000000000000013 /* MoodWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MoodWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +68,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		100000000000000000000502 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		100000000000000000000504 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		100000000000000000000505 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -85,6 +117,22 @@
 			path = "mood-journalTests";
 			sourceTree = "<group>";
 		};
+		100000000000000000000B05 /* MoodNotification */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				100000000000000000000C03 /* Exceptions for "MoodNotification" */,
+			);
+			path = MoodNotification;
+			sourceTree = "<group>";
+		};
+		100000000000000000000B06 /* MoodWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				100000000000000000000C04 /* Exceptions for "MoodWidget" */,
+			);
+			path = MoodWidget;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -104,6 +152,22 @@
 			);
 			target = 100000000000000000000401 /* mood-journal */;
 		};
+		100000000000000000000C03 /* Exceptions for "MoodNotification" */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+				MoodNotification.entitlements,
+			);
+			target = 100000000000000000000404 /* MoodNotification */;
+		};
+		100000000000000000000C04 /* Exceptions for "MoodWidget" */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+				MoodWidget.entitlements,
+			);
+			target = 100000000000000000000405 /* MoodWidget */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXGroup section */
@@ -114,6 +178,8 @@
 				100000000000000000000B03 /* Shared */,
 				100000000000000000000B01 /* mood-journal */,
 				100000000000000000000B04 /* mood-journal Watch App */,
+				100000000000000000000B05 /* MoodNotification */,
+				100000000000000000000B06 /* MoodWidget */,
 				100000000000000000000B02 /* mood-journalTests */,
 				100000000000000000000608 /* Products */,
 			);
@@ -125,6 +191,8 @@
 				10000000000000000000000E /* mood-journal.app */,
 				10000000000000000000000F /* mood-journalTests.xctest */,
 				100000000000000000000011 /* mood-journal Watch App.app */,
+				100000000000000000000012 /* MoodNotification.appex */,
+				100000000000000000000013 /* MoodWidget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -165,11 +233,14 @@
 				100000000000000000000501 /* Frameworks */,
 				100000000000000000000901 /* Resources */,
 				100000000000000000001001 /* Embed Watch Content */,
+				100000000000000000001002 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				100000000000000000000203 /* PBXTargetDependency */,
+				100000000000000000000206 /* PBXTargetDependency */,
+				100000000000000000000208 /* PBXTargetDependency */,
 			);
 			name = "mood-journal";
 			productName = "mood-journal";
@@ -196,6 +267,48 @@
 			productName = "mood-journalTests";
 			productReference = 10000000000000000000000F /* mood-journalTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		100000000000000000000404 /* MoodNotification */ = {
+			isa = PBXNativeTarget;
+			fileSystemSynchronizedGroups = (
+				100000000000000000000B05 /* MoodNotification */,
+				100000000000000000000B03 /* Shared */,
+			);
+			buildConfigurationList = 100000000000000000000705 /* Build configuration list for PBXNativeTarget "MoodNotification" */;
+			buildPhases = (
+				100000000000000000000804 /* Sources */,
+				100000000000000000000504 /* Frameworks */,
+				100000000000000000000904 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MoodNotification;
+			productName = MoodNotification;
+			productReference = 100000000000000000000012 /* MoodNotification.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		100000000000000000000405 /* MoodWidget */ = {
+			isa = PBXNativeTarget;
+			fileSystemSynchronizedGroups = (
+				100000000000000000000B06 /* MoodWidget */,
+				100000000000000000000B03 /* Shared */,
+			);
+			buildConfigurationList = 100000000000000000000706 /* Build configuration list for PBXNativeTarget "MoodWidget" */;
+			buildPhases = (
+				100000000000000000000805 /* Sources */,
+				100000000000000000000505 /* Frameworks */,
+				100000000000000000000905 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MoodWidget;
+			productName = MoodWidget;
+			productReference = 100000000000000000000013 /* MoodWidget.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -236,6 +349,8 @@
 				100000000000000000000401 /* mood-journal */,
 				100000000000000000000402 /* mood-journalTests */,
 				100000000000000000000403 /* mood-journal Watch App */,
+				100000000000000000000404 /* MoodNotification */,
+				100000000000000000000405 /* MoodWidget */,
 			);
 		};
 /* End PBXProject section */
@@ -250,6 +365,18 @@
 				100000000000000000000120 /* mood-journal Watch App.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		100000000000000000001002 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				100000000000000000000121 /* MoodNotification.appex in Embed Foundation Extensions */,
+				100000000000000000000122 /* MoodWidget.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -270,6 +397,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		100000000000000000000902 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		100000000000000000000904 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		100000000000000000000905 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -300,6 +441,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		100000000000000000000804 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		100000000000000000000805 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -312,6 +467,16 @@
 			isa = PBXTargetDependency;
 			target = 100000000000000000000401 /* mood-journal */;
 			targetProxy = 100000000000000000000201 /* PBXContainerItemProxy */;
+		};
+		100000000000000000000206 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 100000000000000000000404 /* MoodNotification */;
+			targetProxy = 100000000000000000000205 /* PBXContainerItemProxy */;
+		};
+		100000000000000000000208 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 100000000000000000000405 /* MoodWidget */;
+			targetProxy = 100000000000000000000207 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -597,6 +762,124 @@
 			};
 			name = Release;
 		};
+		100000000000000000000A09 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = MoodNotification/MoodNotification.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "$(MOOD_DEVELOPMENT_TEAM)";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = MoodNotification/Info.plist;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					UserNotificationsUI,
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(MOOD_BUNDLE_ID).notification";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		100000000000000000000A0A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = MoodNotification/MoodNotification.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "$(MOOD_DEVELOPMENT_TEAM)";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = MoodNotification/Info.plist;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					UserNotificationsUI,
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(MOOD_BUNDLE_ID).notification";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		100000000000000000000A0B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = MoodWidget/MoodWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "$(MOOD_DEVELOPMENT_TEAM)";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = MoodWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(MOOD_BUNDLE_ID).widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		100000000000000000000A0C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = MoodWidget/MoodWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "$(MOOD_DEVELOPMENT_TEAM)";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = MoodWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(MOOD_BUNDLE_ID).widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -632,6 +915,24 @@
 			buildConfigurations = (
 				100000000000000000000A01 /* Debug */,
 				100000000000000000000A02 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		100000000000000000000705 /* Build configuration list for PBXNativeTarget "MoodNotification" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				100000000000000000000A09 /* Debug */,
+				100000000000000000000A0A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		100000000000000000000706 /* Build configuration list for PBXNativeTarget "MoodWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				100000000000000000000A0B /* Debug */,
+				100000000000000000000A0C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

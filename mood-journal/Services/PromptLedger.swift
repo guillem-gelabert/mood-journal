@@ -7,8 +7,7 @@ import Foundation
 /// notification merely fires, so a tap-based ledger would only ever see the prompts you
 /// already answered.
 enum PromptLedger {
-    /// How long after a prompt a mood still counts as answering it.
-    static let completionWindow: TimeInterval = 2 * 3600
+    static let completionWindow = PromptSchedule.completionWindow
 
     /// Prompts scheduled per synthetic backfill day are spread across this span.
     static let backfillDayStartHour = 9

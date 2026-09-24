@@ -40,6 +40,16 @@ struct SettingsView: View {
                 }
                 Button("Open Health Settings") { openSettings() }
             }
+
+            #if DEBUG
+            Section {
+                Button("Send test reminder in 5 s") {
+                    Task { await NotificationReminderScheduler().sendTestReminder() }
+                }
+            } footer: {
+                Text("Debug builds only. Long-press it to log from the notification.")
+            }
+            #endif
         }
         .sheet(isPresented: $isExporting) {
             ExportReportView(store: store)
