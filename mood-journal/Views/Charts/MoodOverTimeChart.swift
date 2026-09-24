@@ -68,6 +68,16 @@ struct MoodOverTimeChart: View {
                 .interpolationMethod(interpolation)
             }
 
+            ForEach(checkIns) { sample in
+                PointMark(
+                    x: .value("Date", sample.date),
+                    y: .value("Valence", sample.valence)
+                )
+                .foregroundStyle(MoodAnalytics.chartClassification(for: sample.valence).color)
+                .symbolSize(42)
+            }
+
+            // Marks draw in declaration order, so the average goes last to sit on top of the dots.
             ForEach(rolling) { point in
                 LineMark(
                     x: .value("Date", point.date),
@@ -76,15 +86,6 @@ struct MoodOverTimeChart: View {
                 .foregroundStyle(Color.journalInk)
                 .lineStyle(.init(lineWidth: 2))
                 .interpolationMethod(interpolation)
-            }
-
-            ForEach(checkIns) { sample in
-                PointMark(
-                    x: .value("Date", sample.date),
-                    y: .value("Valence", sample.valence)
-                )
-                .foregroundStyle(MoodAnalytics.chartClassification(for: sample.valence).color)
-                .symbolSize(42)
             }
         }
     }
