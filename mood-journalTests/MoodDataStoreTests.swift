@@ -3,6 +3,11 @@ import XCTest
 
 /// Stands in for HealthKitService. Holds the snapshot call open on a continuation so a test
 /// can observe the store mid-load.
+///
+/// Main-actor isolated so the hold and the release cannot interleave: off the main actor, a
+/// release could land between counting the call and storing the continuation, and the test
+/// then waited forever on a continuation nothing would resume.
+@MainActor
 final class StubHealthService: HealthDataReading {
     private(set) var authorizationCallCount = 0
     private(set) var snapshotCallCount = 0
@@ -30,7 +35,7 @@ final class StubHealthService: HealthDataReading {
         return snapshot
     }
 
-    func earliestPermittedSampleDate() -> Date {
+    nonisolated func earliestPermittedSampleDate() -> Date {
         Date(timeIntervalSince1970: 0)
     }
 

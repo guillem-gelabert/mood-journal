@@ -10,6 +10,9 @@ final class InMemoryReminderStore: ReminderPersisting {
     func save(_ reminders: [Reminder]) { stored = reminders }
 }
 
+/// Main-actor isolated because RemindersModel syncs from unstructured tasks: off the main
+/// actor, two of them appending at once corrupted the array and crashed the test host.
+@MainActor
 final class SpyScheduler: ReminderScheduling {
     private(set) var syncedLists: [[Reminder]] = []
     private(set) var authorizationRequests = 0
