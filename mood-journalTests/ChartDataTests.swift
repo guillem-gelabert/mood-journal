@@ -3,8 +3,8 @@ import XCTest
 
 final class ChartDataTests: XCTestCase {
     /// Picking 1Y with six months of history should draw six months across the full width,
-    /// not half a chart and half a void.
-    func testDomainFollowsTheDataRatherThanTheRange() {
+    /// not half a chart and half a void, and still run to today.
+    func testDomainStartsAtTheFirstEntryAndEndsWithTheRange() {
         let interval = DateInterval(start: Self.date("2026-01-01 00:00"), end: Self.date("2027-01-01 00:00"))
         let checkIns = [
             MoodCheckIn(date: Self.date("2026-03-04 09:00"), valence: 0.2),
@@ -18,11 +18,10 @@ final class ChartDataTests: XCTestCase {
         )
 
         XCTAssertEqual(data.domain.lowerBound, Self.date("2026-03-04 00:00"))
-        XCTAssertEqual(data.domain.upperBound, Self.date("2026-06-21 00:00"))
-        XCTAssertLessThan(data.domain.upperBound, interval.end)
+        XCTAssertEqual(data.domain.upperBound, interval.end)
     }
 
-    func testDomainSpansEverySeriesNotJustMood() {
+    func testDomainStartsAtTheFirstMoodEntryNotOtherSeries() {
         let interval = DateInterval(start: Self.date("2026-01-01 00:00"), end: Self.date("2026-12-01 00:00"))
         let snapshot = HealthSnapshot(
             moodCheckIns: [MoodCheckIn(date: Self.date("2026-05-10 09:00"), valence: 0.1)],
@@ -32,10 +31,11 @@ final class ChartDataTests: XCTestCase {
 
         let data = MoodAnalytics.derive(snapshot: snapshot, interval: interval, calendar: Self.utc)
 
-        // Energy starts earliest and sleep ends latest; the charts share one extent so they
-        // stay vertically comparable.
-        XCTAssertEqual(data.domain.lowerBound, Self.date("2026-02-02 00:00"))
-        XCTAssertEqual(data.domain.upperBound, Self.date("2026-08-09 00:00"))
+        // Earlier energy history must not open the mood chart with an empty stretch.
+        XCTAssertEqual(data.domain.lowerBound, Self.date("2026-05-10 00:00"))
+        XCTAssertEqual(data.domain.upperBound, interval.end)
+        XCTAssertTrue(data.dailyEnergy.isEmpty)
+        XCTAssertEqual(data.sleepNights.count, 1)
     }
 
     func testDomainFallsBackToTheRangeWithNoData() {

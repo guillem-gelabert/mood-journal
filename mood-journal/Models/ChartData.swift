@@ -17,8 +17,8 @@ struct ChartData: Equatable {
     var monthStarts: [Date] = []
     var fifteenthDates: [Date] = []
     var interval: DateInterval?
-    /// The extent actually covered by loaded samples, clipped to `interval`. Nil when the
-    /// range holds no data at all.
+    /// From the first mood entry in `interval` to its end. Nil when the range holds no
+    /// mood entries.
     var dataInterval: DateInterval?
 
     static let empty = ChartData()
@@ -26,8 +26,9 @@ struct ChartData: Equatable {
     /// Every time-series chart shares this, so they stay vertically comparable and the PDF
     /// renders the same window the screen showed.
     ///
-    /// Follows the data rather than the picked range: choosing 1Y with six months of history
-    /// draws six months across the full width instead of half a chart and half a void.
+    /// Starts at the first mood entry rather than the picked range: choosing 1Y with six
+    /// months of history draws six months across the full width instead of half a chart and
+    /// half a void. Always ends today.
     var domain: ClosedRange<Date> {
         guard let effective = dataInterval ?? interval else {
             let now = Date()

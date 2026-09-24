@@ -22,35 +22,32 @@ enum MoodAnalytics {
         let sleep = snapshot.sleepNights.filter { inRange($0.date) }
         let rangeDays = calendar.dateComponents([.day], from: interval.start, to: interval.end).day ?? 0
 
-        // One shared extent across every series, so the charts stay vertically comparable
-        // while still stretching to fill the width when history is shorter than the range.
-        let sampleDates = checkIns.map(\.date) + energy.map(\.date) + sleep.map(\.date)
-        let dataInterval: DateInterval? = sampleDates.min().flatMap { earliest in
-            sampleDates.max().flatMap { latest in
-                let start = calendar.startOfDay(for: earliest)
-                guard let end = calendar.date(byAdding: .day, value: 1, to: calendar.startOfDay(for: latest)),
-                      start < end
-                else {
-                    return nil
-                }
-                return DateInterval(start: start, end: min(end, interval.end))
-            }
+        // One shared extent across every series, so the charts stay vertically comparable.
+        // It starts at the first mood entry, since mood is what the app logs and older energy
+        // or sleep history would otherwise open with an empty stretch on the mood chart, and
+        // it always runs to today so a quiet few days show as a gap rather than vanishing.
+        let dataInterval: DateInterval? = checkIns.map(\.date).min().flatMap { earliest in
+            let start = calendar.startOfDay(for: earliest)
+            return start < interval.end ? DateInterval(start: start, end: interval.end) : nil
         }
         let dataStart = dataInterval?.start ?? interval.start
         let dataEnd = dataInterval?.end ?? interval.end
+        // Energy and sleep can predate the first mood entry; an explicit chart domain does
+        // not clip marks, so they are trimmed here instead of spilling past the axis.
+        func inDomain(_ date: Date) -> Bool { date >= dataStart && date < dataEnd }
 
         return ChartData(
             checkIns: checkIns,
-            dailyEnergy: energy,
-            sleepNights: sleep,
+            dailyEnergy: energy.filter { inDomain($0.date) },
+            sleepNights: sleep.filter { inDomain($0.date) },
             rollingMood: centeredRollingDailyMean(checkIns: snapshot.moodCheckIns, calendar: calendar)
                 .filter { inRange($0.date) },
             moodBands: centeredRawStandardDeviationBand(checkIns: snapshot.moodCheckIns, calendar: calendar)
                 .filter { inRange($0.date) },
             rollingEnergy: rollingEnergyAverage(values: snapshot.dailyEnergy, calendar: calendar)
-                .filter { inRange($0.date) },
+                .filter { inDomain($0.date) },
             rollingSleep: rollingSleepAverage(values: snapshot.sleepNights, calendar: calendar)
-                .filter { inRange($0.date) },
+                .filter { inDomain($0.date) },
             weekdaySamples: weekdaySamples(checkIns: checkIns, calendar: calendar),
             weekdayStats: weekdayStats(
                 checkIns: checkIns,
