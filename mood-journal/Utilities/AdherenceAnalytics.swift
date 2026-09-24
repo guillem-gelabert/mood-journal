@@ -48,15 +48,57 @@ enum AdherenceAnalytics {
         return recovered / missed
     }
 
+    /// Fewer daily samples than this and "usual" would just be last week restated.
+    static let minimumUsualMomentumSamples = 14
+    static let recentResilienceDays = 90
+
+    /// The mean of M evaluated at the same time of day on every earlier day back to the first
+    /// prompt. Momentum already weights toward the present, so its value right now is compared
+    /// against what that value has typically been, not against a flat past rate. All of
+    /// history rather than a recent window, so a slow stretch never becomes the standard.
+    static func usualMomentum(
+        prompts: [PromptRecord],
+        now: Date,
+        halfLifeDays: Double = defaultHalfLifeDays
+    ) -> Double? {
+        guard let first = prompts.map(\.scheduledAt).min() else { return nil }
+        let days = Int(now.timeIntervalSince(first) / 86_400)
+        guard days >= 1 else { return nil }
+
+        let samples = (1...days).compactMap { daysAgo in
+            momentum(prompts: prompts, now: now.addingTimeInterval(-Double(daysAgo) * 86_400), halfLifeDays: halfLifeDays)
+        }
+        guard samples.count >= minimumUsualMomentumSamples else { return nil }
+        return samples.reduce(0, +) / Double(samples.count)
+    }
+
+    /// R split at `days` ago: the recent figure shown, and the earlier one it is judged against.
+    /// Over all of history R barely moves once there is a lot of it, so improvement only shows
+    /// when the recent stretch stands on its own.
+    static func resilienceSplit(
+        prompts: [PromptRecord],
+        now: Date,
+        days: Int = recentResilienceDays
+    ) -> (recent: Double?, before: Double?) {
+        let cutoff = now.addingTimeInterval(-Double(days) * 86_400)
+        return (
+            resilience(prompts: prompts.filter { $0.scheduledAt >= cutoff && $0.scheduledAt <= now }),
+            resilience(prompts: prompts.filter { $0.scheduledAt < cutoff })
+        )
+    }
+
     static func stats(
         prompts: [PromptRecord],
         now: Date,
         halfLifeDays: Double = defaultHalfLifeDays
     ) -> AdherenceStats {
-        AdherenceStats(
+        let split = resilienceSplit(prompts: prompts, now: now)
+        return AdherenceStats(
             momentum: momentum(prompts: prompts, now: now, halfLifeDays: halfLifeDays),
-            resilience: resilience(prompts: prompts),
-            includesEstimates: prompts.contains(where: \.isEstimated)
+            resilience: split.recent,
+            includesEstimates: prompts.contains(where: \.isEstimated),
+            usualMomentum: usualMomentum(prompts: prompts, now: now, halfLifeDays: halfLifeDays),
+            resilienceBefore: split.before
         )
     }
 }

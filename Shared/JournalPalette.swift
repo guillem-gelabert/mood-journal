@@ -40,4 +40,9 @@ extension ShapeStyle where Self == Color {
     static var journalBand: Color { Color(hex: "d5d0c8") }
     static var journalEnergy: Color { Color(hex: "8a9a72") }
     static var journalSleep: Color { Color(hex: "6b7f9e") }
+    /// Trend colours for the adherence numbers, darkened from the mood palette so they hold
+    /// contrast as large text on the paper background.
+    static var journalTrendBetter: Color { Color(hex: "3f7d59") }
+    static var journalTrendSteady: Color { Color(hex: "a07a12") }
+    static var journalTrendWorse: Color { Color(hex: "b04a3c") }
 }
